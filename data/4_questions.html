@@ -1,0 +1,1307 @@
+<!--[if IE]><![endif]-->
+<!DOCTYPE html>
+
+<header>
+<h1><a id="start"></a><span epub:type="pagebreak" role="doc-pagebreak" id="Page_135"></span><span class="chapterNumber">Chapter 4</span><br><span class="chapterTitle">Domain 4: Design Cost-Optimized Architectures</span></h1>
+</header>
+<section id="c04-sec-0001">
+<ol class="none">
+<li><b>✓ Subdomain: 4.1 Determine how to design cost-optimized storage.</b></li>
+<li><b>✓ Subdomain: 4.2 Determine how to design cost-optimized compute.</b></li>
+</ol>
+<section class="exercises">
+<h2><span epub:type="pagebreak" role="doc-pagebreak" id="Page_136"></span><a id="c04-exsec-0001"></a>Review Questions</h2>
+<section class="questionSet">
+<ol class="questionList">
+<li class="essay">
+<div class="question">
+<p>You have a data analysis application that uses high compute instances
+ along with RDS to do biological analysis on large datasets. The 
+computations are not time sensitive and can be run anytime throughout 
+the day. However, because of the high compute resources required, the 
+processing is quite expensive. What could you do to defray these costs? 
+(Choose two.)</p>
+<ol id="c04-list-0001" type="a">
+<li>Purchase reserved instances and pay entirely up front for the instance usage charges.</li>
+<li>Use the spot market, setting a bid price lower than the current on-demand pricing.</li>
+<li>Lower the instance class to a less costly class and allow the processing to run longer at lower per-instance costs.</li>
+<li>Contact AWS and ask for discounted instance pricing based on your recurring usage.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid payment options for reserved instances? (Choose two.)</p>
+<ol id="c04-list-0002" type="a">
+<li>Actual usage pricing</li>
+<li>Predictive pricing</li>
+<li>All up-front pricing</li>
+<li>Nothing up-front pricing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How do you move a reserved instance from one region to another?</p>
+<ol id="c04-list-0003" type="a">
+<li>Shut the instance down, change its region via the console or CLI, and restart the instance.</li>
+<li>Contact your AWS billing resource to manually move the instance and its associated billing.</li>
+<li>Make a snapshot of the instance, copy the snapshot to the new region, and start the instance from the snapshot.</li>
+<li>You cannot move reserved instances across regions.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following allows you the least expensive access to compute resources?</p>
+<ol id="c04-list-0004" type="a">
+<li>On-demand instances</li>
+<li>Reserved instances</li>
+<li>Spot instances</li>
+<li>Dedicated hosts</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are not reasons to select an on-demand instance? (Choose two.)</p>
+<ol id="c04-list-0005" type="a">
+<li>Applications with short-term, spiky workloads</li>
+<li>Applications that have flexible start and end times</li>
+<li>Applications with steady-state usage</li>
+<li>Applications being developed or tested on EC2 for the first time</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_137"></span>Which of the following are reasons to select a spot instance? (Choose two.)</p>
+<ol id="c04-list-0006" type="a">
+<li>Applications with short-term, spiky workloads</li>
+<li>Applications that have flexible start and end times</li>
+<li>Applications with steady-state usage</li>
+<li>Applications that are only feasible at very low compute prices</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are not reasons to select a reserved instance? (Choose two.)</p>
+<ol id="c04-list-0007" type="a">
+<li>Applications that may require reserved capacity</li>
+<li>Applications with steady-state usage</li>
+<li>Users with urgent computing needs for large amounts of additional capacity</li>
+<li>Users that cannot make any up-front payment or long-term commitment</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are reasons to select the S3 standard storage class? (Choose two.)</p>
+<ol id="c04-list-0008" type="a">
+<li>Need for high durability</li>
+<li>Need for highest available throughput</li>
+<li>Infrequent access of objects</li>
+<li>Objects can easily be re-created if lost.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are the architect for a web application that exists on a cluster 
+of EC2 instances all within an Auto Scaling group. During periods of 
+high activity, the group scales up— adding instances—and then quickly 
+scales back down. However, this occurs multiple times within a two-hour 
+window, incurring significant costs. How could you reduce costs while 
+ensuring that demand is still met? (Choose two.)</p>
+<ol id="c04-list-0009" type="a">
+<li>Modify the Auto Scaling group’s cool-down timers.</li>
+<li>Modify the Auto Scaling group to use scheduled scaling.</li>
+<li>Lower the CloudWatch alarm threshold that causes the Auto Scaling group to scale up.</li>
+<li>Modify the CloudWatch alarm period that causes the Auto Scaling group to scale down.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your company needs a storage solution that can support millions of 
+customers accessing billing data. The data should be instantly 
+accessible for users, but individual bills are not accessed that often. 
+What is the most cost-efficient storage for this use case?</p>
+<ol id="c04-list-0010" type="a">
+<li>Glacier with expedited retrieval</li>
+<li>S3 with Transfer Acceleration</li>
+<li>Standard S3</li>
+<li>S3-IA</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Is the S3-IA storage class less expensive than S3?</p>
+<ol id="c04-list-0011" type="a">
+<li>Yes</li>
+<li>No</li>
+<li>Their costs are identical.</li>
+<li>It depends on how the storage class is used.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_138"></span>You
+ have a website running on a fleet of EC2 instances behind an ELB. You 
+also have an Auto Scaling group running across multiple availability 
+zones. The instances are serving files from an EFS file system, but you 
+are incurring lag and significant cost from serving these files from 
+disk over and over. What would you recommend as a solution for reducing 
+costs while still handling high traffic without degradation?</p>
+<ol id="c04-list-0012" type="a">
+<li>Move the files into S3 standard.</li>
+<li>Use Elastic Transcoder to reduce the file sizes.</li>
+<li>Cache the files using CloudFront.</li>
+<li>Use reserved EC2 instances instead of on-demand instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a large archive of documents that must be backed up. The 
+documents will be accessed very infrequently, if at all. However, when 
+the documents are accessed, they must be delivered within 10 minutes of a
+ retrieval request. What is the most cost-effective option for storing 
+these documents?</p>
+<ol id="c04-list-0013" type="a">
+<li>S3</li>
+<li>S3-IA</li>
+<li>Glacier</li>
+<li>Glacier with expedited retrieval</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your application has a 200 GB database running on an EC2 instance. 
+You cannot move the database to RDS because of a custom spatial plug-in.
+ The application is currently peaking in the morning and the evening, 
+but the peaks are small and usage throughout the day is minimal. You 
+need to ensure solid performance but keep costs low. What storage type 
+would you use?</p>
+<ol id="c04-list-0014" type="a">
+<li>EFS</li>
+<li>EBS with a General Purpose SSD</li>
+<li>EBS with a provisioned IOPS SSD</li>
+<li>EBS with a magnetic HDD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which EBS volume type is most appropriate for use with a large database workload?</p>
+<ol id="c04-list-0015" type="a">
+<li>EBS with a throughput optimized HDD</li>
+<li>EBS with a General Purpose SSD</li>
+<li>EBS with a provisioned IOPS SSD</li>
+<li>EBS with a magnetic HDD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is the least expensive EBS volume type?</p>
+<ol id="c04-list-0016" type="a">
+<li>Throughput optimized HDD</li>
+<li>General Purpose SSD</li>
+<li>Provisioned IOPS SSD</li>
+<li>Cold HDD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_139"></span>Your
+ application currently stores all its data on EBS volumes. You want to 
+ensure that these volumes are backed up durably. However, you also want 
+to use as few different managed services as possible in order to keep 
+backup costs low. What option would you recommend?</p>
+<ol id="c04-list-0017" type="a">
+<li>Take regular EBS snapshots manually.</li>
+<li>Set up a Lambda function to take EBS snapshots and trigger the function through CloudWatch alarms.</li>
+<li>Create a script to copy the EBS data to S3 and run it on an EC2 instance.</li>
+<li>Mirror data across two EBS volumes.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are the architect for a highly available and highly scalable 
+accounting application. All transaction records in the application’s 
+data stores must be available for immediate retrieval for three months, 
+but then they should be purged to reduce storage costs. How can you most
+ easily address this requirement?</p>
+<ol id="c04-list-0018" type="a">
+<li>Store the transaction records on EBS and delete the volume after three months.</li>
+<li>Store the transaction records in S3 and use lifecycle management to delete the records after three months.</li>
+<li>Store the transaction records in Glacier and use lifecycle management to delete the records after three months.</li>
+<li>Store the transaction records in EBS and use lifecycle management to delete the records after three months.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have heavy load on an RDS data instance. You want to avoid the 
+overhead and cost of upgrading the instance to a larger instance size. 
+What other options should you consider? (Choose two.)</p>
+<ol id="c04-list-0019" type="a">
+<li>RDS read replicas</li>
+<li>RDS Multi-AZ</li>
+<li>ElastiCache</li>
+<li>Kinesis</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are in charge of storage for large datasets at a predictive 
+analytics firm. You are tasked with minimizing storage costs. You need 
+to store data 30–59 days old in a storage class that makes the data 
+immediately available and data older than 60 days in a class that makes 
+the data available within 10 hours. You want to use the least expensive 
+classes available. Which two storage classes would you choose? (Choose 
+two.)</p>
+<ol id="c04-list-0020" type="a">
+<li>S3 standard</li>
+<li>S3 Infrequent Access</li>
+<li>S3 RRS</li>
+<li>Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_140"></span>You
+ want to optimize performance and cost of your application by creating a
+ placement group rather than hosting separate copies of your application
+ in multiple availability zones. Across how many availability zones can a
+ placement group span?</p>
+<ol id="c04-list-0021" type="a">
+<li>One</li>
+<li>One or more</li>
+<li>Two or more</li>
+<li>Placement groups are not in availability zones.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Across how many availability zones can a spread placement group be stretched?</p>
+<ol id="c04-list-0022" type="a">
+<li>One</li>
+<li>One or more</li>
+<li>Two or more</li>
+<li>Placement groups are not in availability zones.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many instances can run in a single availability zone for a spread placement group?</p>
+<ol id="c04-list-0023" type="a">
+<li>One</li>
+<li>Five</li>
+<li>Seven</li>
+<li>Nine</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are advantages of a spread placement group over using non-grouped instances? (Choose two.)</p>
+<ol id="c04-list-0024" type="a">
+<li>A spread placement group can span peered VPCs in the same region.</li>
+<li>A spread placement group is less expensive than the same number of on-demand instances not in a group.</li>
+<li>A spread placement group allows instances to talk with negligible network lag.</li>
+<li>A spread placement group reduces IO in an instance within that group.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements about placement groups is false?</p>
+<ol id="c04-list-0025" type="a">
+<li>A spread placement group can span peered VPCs in the same region.</li>
+<li>A clustered placement group has instances all in a single availability zone.</li>
+<li>A spread placement group allows instances to talk across regions without network lag.</li>
+<li>A clustered placement group involves fewer availability zones than a spread placement group.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following actions incur costs within AWS? (Choose two.)</p>
+<ol id="c04-list-0026" type="a">
+<li>Data ingress from the Internet</li>
+<li>Data egress to the Internet</li>
+<li>Transferring data across regions</li>
+<li>Transferring data from one instance to another within the same availability zone</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_141"></span>Which of the following costs the least?</p>
+<ol id="c04-list-0027" type="a">
+<li>Retrieving a file from S3 to a local desktop client</li>
+<li>An instance retrieving data from S3 in the same region</li>
+<li>Uploading a file to S3 from a local desktop client</li>
+<li>An instance retrieving data from S3 in a different region</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following costs the least?</p>
+<ol id="c04-list-0028" type="a">
+<li>Retrieving a file from S3 to a local desktop client</li>
+<li>An instance retrieving data from another instance in the same availability zone</li>
+<li>An instance storing data in S3 in a different region</li>
+<li>An instance retrieving data from S3 in a different region</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following might help reduce data transfer costs? (Choose two.)</p>
+<ol id="c04-list-0029" type="a">
+<li>Set up CloudFront to cache content.</li>
+<li>Ensure that any instances communicating with other instances in the same region have private IP addresses.</li>
+<li>Set up an RDS instance with read replicas.</li>
+<li>Set up S3 buckets with versioning.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a level of AWS support?</p>
+<ol id="c04-list-0030" type="a">
+<li>Developer</li>
+<li>Free tier</li>
+<li>Enterprise</li>
+<li>Business</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is reduced as part of AWS’s total cost of ownership approach?</p>
+<ol id="c04-list-0031" type="a">
+<li>Developer salaries</li>
+<li>DevOps salaries</li>
+<li>Capital expenditures</li>
+<li>Organizational head count</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following payment models does AWS employ to reduce total cost of ownership?</p>
+<ol id="c04-list-0032" type="a">
+<li>Pay up front</li>
+<li>Pay-as-you-go</li>
+<li>Pay after use</li>
+<li>Quarterly pay</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a key tenet of the AWS pricing philosophy?</p>
+<ol id="c04-list-0033" type="a">
+<li>Pay-as-you-go</li>
+<li>Pay less when you reserve.</li>
+<li>Pay less per unit by using more.</li>
+<li>Pay more only when AWS grows.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_142"></span>Which of the following is not a pricing model for instances?</p>
+<ol id="c04-list-0034" type="a">
+<li>On demand</li>
+<li>Reserved</li>
+<li>Migration only</li>
+<li>Spot instance</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>When calculating total cost of ownership, what instance pricing model does AWS suggest using?</p>
+<ol id="c04-list-0035" type="a">
+<li>On demand</li>
+<li>Reserved</li>
+<li>Dedicated hardware</li>
+<li>Spot instance</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How does the cost of standard reserved instances compare with the cost of on-demand instances?</p>
+<ol id="c04-list-0036" type="a">
+<li>Standard reserved instances cost significantly less than on-demand instances.</li>
+<li>Standard reserved instances cost about the same as on-demand instances.</li>
+<li>Standard reserved instances cost significantly more than on-demand instances.</li>
+<li>Standard reserved instances cost a little bit less than on-demand instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a valid payment option for reserved instances?</p>
+<ol id="c04-list-0037" type="a">
+<li>No upfront</li>
+<li>Partial upfront</li>
+<li>Half upfront</li>
+<li>All upfront</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is the least expensive payment model for reserved instances?</p>
+<ol id="c04-list-0038" type="a">
+<li>No upfront</li>
+<li>Partial upfront</li>
+<li>All upfront</li>
+<li>They are all the same.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid terms for reserved instances? (Choose two.)</p>
+<ol id="c04-list-0039" type="a">
+<li>Six months</li>
+<li>One year</li>
+<li>Two years</li>
+<li>Three years</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid pricing models for EC2 instances? (Choose two.)</p>
+<ol id="c04-list-0040" type="a">
+<li>Spot instances</li>
+<li>Spot market</li>
+<li>Dedicated hosts</li>
+<li>All upfront</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_143"></span>Which instance type is ideal for an application that has a flexible start and end time?</p>
+<ol id="c04-list-0041" type="a">
+<li>Spot instances</li>
+<li>On-demand instances</li>
+<li>Dedicated hosts</li>
+<li>Reserved instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which instance type is ideal for an application that suffers numerous spikes in usage at unpredictable times?</p>
+<ol id="c04-list-0042" type="a">
+<li>Spot instances</li>
+<li>On-demand instances</li>
+<li>Dedicated hosts</li>
+<li>Reserved instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which instance type is ideal for an application that has a 
+long-running compute job that cannot be interrupted but also suffers 
+from significant fluctuations in usage patterns?</p>
+<ol id="c04-list-0043" type="a">
+<li>Spot instances</li>
+<li>On-demand instances</li>
+<li>Dedicated hosts</li>
+<li>Reserved instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid ways to purchase dedicated hosts? (Choose two.)</p>
+<ol id="c04-list-0044" type="a">
+<li>On-demand hourly</li>
+<li>All upfront</li>
+<li>On layaway</li>
+<li>As a reservation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are reasons to consider reserved instances? (Choose two.)</p>
+<ol id="c04-list-0045" type="a">
+<li>You are running an application that involves lots of short-running compute jobs.</li>
+<li>You are running an application with steady-state usage.</li>
+<li>Your business is guaranteed to need cloud compute for at least the next 18 months.</li>
+<li>You are looking to minimize commitments to AWS.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a reason to consider spot instances?</p>
+<ol id="c04-list-0046" type="a">
+<li>Your applications have flexible start and end times.</li>
+<li>Your applications can only run if compute costs are low because of CPU utilization.</li>
+<li>You expect to have significant compute needs and potentially a need for lots of additional capacity.</li>
+<li>You expect usage to increase dramatically in the evenings and need to support that usage.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_144"></span>You
+ have been brought in to introduce an organization to the cloud. They 
+have several applications ideal for cloud hosting but do not want to 
+make any up-front commitments. Further, they are concerned that the 
+cloud will be “unreliable” so you need to ensure that applications run 
+smoothly. What instance types would you recommend?</p>
+<ol id="c04-list-0047" type="a">
+<li>Spot instances</li>
+<li>On-demand instances</li>
+<li>Dedicated hosts</li>
+<li>Reserved instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are benefits to spot instances? (Choose two.)</p>
+<ol id="c04-list-0048" type="a">
+<li>Applications can be paused and later resumed.</li>
+<li>Costs are reduced compared to on-demand pricing.</li>
+<li>The same hardware will be used for the life of an application.</li>
+<li>They can handle spikes in usage without issue.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following offers the lowest pricing for storage (per GB)?</p>
+<ol id="c04-list-0049" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>Amazon Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not an actual S3 storage class?</p>
+<ol id="c04-list-0050" type="a">
+<li>S3-SSE</li>
+<li>S3 Standard-IA</li>
+<li>S3 RRS</li>
+<li>Amazon Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following would not incur a charge?</p>
+<ol id="c04-list-0051" type="a">
+<li>Distributing data via S3 signed URLs to an Internet client in the same region</li>
+<li>Distributing data via CloudFront to an Internet client in a different region</li>
+<li>Uploading data to S3 via a user’s web interface</li>
+<li>Transferring data from an EC2 instance to an instance in another region</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following would not incur a charge?</p>
+<ol id="c04-list-0052" type="a">
+<li>Transferring data from S3 to CloudFront</li>
+<li>Distributing data via CloudFront to an Internet client in a different region</li>
+<li>Transferring data from an EC2 instance to an instance in another region</li>
+<li>Importing data to S3 via Transfer Acceleration</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_145"></span>What is the AWS free tier?</p>
+<ol id="c04-list-0053" type="a">
+<li>A platform for experimenting with AWS that can never be in production</li>
+<li>A tier of AWS that allows limited access to AWS services at no cost</li>
+<li>A class of EC2 instances that never cost anything for unlimited compute</li>
+<li>A prepackaged suite of AWS services that can be used for web hosting at no cost</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the AWS marketplace?</p>
+<ol id="c04-list-0054" type="a">
+<li>A market for products, many of which can run on the AWS free tier</li>
+<li>A market for prebuilt AMIs beyond the standard AWS offerings</li>
+<li>A market for plug-ins and trials of paid third-party AWS services</li>
+<li>All of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What of the following services is available in AWS free tier?</p>
+<ol id="c04-list-0055" type="a">
+<li>DynamoDB</li>
+<li>AWS Lambda</li>
+<li>SNS and SQS</li>
+<li>All of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is an AWS support plan?</p>
+<ol id="c04-list-0056" type="a">
+<li>Standard</li>
+<li>Free</li>
+<li>Small teams</li>
+<li>Enterprise</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following AWS support plans offer 24/7 support? (Choose two.)</p>
+<ol id="c04-list-0057" type="a">
+<li>Basic</li>
+<li>Developer</li>
+<li>Business</li>
+<li>Enterprise</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is AWS Trusted Advisor?</p>
+<ol id="c04-list-0058" type="a">
+<li>An AWS security service</li>
+<li>An online resource to help you reduce cost</li>
+<li>A logging tool to help you detect intrusions</li>
+<li>A performance tool to help you correctly size your Auto Scaling groups</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many core Trusted Advisor checks does the Trusted Advisor tool provide?</p>
+<ol id="c04-list-0059" type="a">
+<li>Three</li>
+<li>Four</li>
+<li>Five</li>
+<li>Nine</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_146"></span>Which of the following might be a recommendation from Trusted Advisor? (Choose two.)</p>
+<ol id="c04-list-0060" type="a">
+<li>Turn on MFA for the root account.</li>
+<li>Turn off global access to an S3 bucket.</li>
+<li>Turn on Transfer Acceleration for S3.</li>
+<li>Turn on MFA Delete for S3.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not an area in which Trusted Advisor makes recommendations?</p>
+<ol id="c04-list-0061" type="a">
+<li>S3 bucket permissions</li>
+<li>IAM usage</li>
+<li>RDS public snapshots</li>
+<li>DNS usage</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a category for which Trusted Advisor makes recommendations?</p>
+<ol id="c04-list-0062" type="a">
+<li>Security</li>
+<li>Scalability</li>
+<li>Service limits</li>
+<li>Fault tolerance</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are categories for which Trusted Advisor makes recommendations? (Choose two.)</p>
+<ol id="c04-list-0063" type="a">
+<li>Performance</li>
+<li>Auto Scaling</li>
+<li>Caching</li>
+<li>Security</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following might be an area about which Trusted Advisor makes recommendations? (Choose two.)</p>
+<ol id="c04-list-0064" type="a">
+<li>Idle load balancers</li>
+<li>Incorrect S3 storage class</li>
+<li>No MFA on root account</li>
+<li>Underuse of DNS records</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are recommendations AWS makes to help you control your AWS costs? (Choose two.)</p>
+<ol id="c04-list-0065" type="a">
+<li>Right-size your services to meet capacity at the lowest cost.</li>
+<li>Save money by reserving.</li>
+<li>Save money with on-demand resources.</li>
+<li>Buy high capacity and serve low capacity.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_147"></span>Which of the following might be a means by which you could decrease AWS costs in any standard application stack?</p>
+<ol id="c04-list-0066" type="a">
+<li>Use DynamoDB instead of RDS.</li>
+<li>Use Route 53 instead of non-AWS registrars.</li>
+<li>Use the spot market.</li>
+<li>Use dedicated host instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is AWS Cost Explorer?</p>
+<ol id="c04-list-0067" type="a">
+<li>An analytics tool for evaluating instance usage</li>
+<li>An analytics tool for evaluating RDS usage</li>
+<li>An analytics tool for managing AWS costs over time</li>
+<li>An analytics tool for managing application deployments</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to anticipate your costs over the next year. Which of the following tools would you use?</p>
+<ol id="c04-list-0068" type="a">
+<li>AWS Trusted Advisor</li>
+<li>AWS Cost Explorer</li>
+<li>AWS Cost Manager</li>
+<li>AWS Savings Advisor</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to determine how your instance class choices are affecting your overall AWS spending. Which tool would help?</p>
+<ol id="c04-list-0069" type="a">
+<li>AWS Trusted Advisor</li>
+<li>AWS Cost Explorer</li>
+<li>AWS Auto Scaling groups</li>
+<li>AWS CloudTrail</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to set limits on how much is spent monthly on S3 storage. Which of the following tools would be helpful?</p>
+<ol id="c04-list-0070" type="a">
+<li>AWS Trusted Advisor</li>
+<li>AWS Cost Explorer</li>
+<li>AWS Budgets</li>
+<li>AWS CloudFormation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to cut off all access to your S3 buckets when a certain cost threshold is reached. Which tool allows you to do this?</p>
+<ol id="c04-list-0071" type="a">
+<li>AWS Trusted Advisor</li>
+<li>AWS Cost Explorer</li>
+<li>AWS Budgets</li>
+<li>None of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_148"></span>You
+ need to produce media files optimized for various device types to 
+optimize costs associated with transferring and viewing media on those 
+devices. What AWS service would you use?</p>
+<ol id="c04-list-0072" type="a">
+<li>SWF</li>
+<li>Workspaces</li>
+<li>Elastic Transcoder</li>
+<li>Cost Explorer</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to reduce the maintenance costs of supporting Oracle on a 
+fleet of EC2 instances. What service is well suited for offloading 
+maintenance costs for Oracle database hosting?</p>
+<ol id="c04-list-0073" type="a">
+<li>RDS</li>
+<li>EMR</li>
+<li>SWF</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to delay the cost of hiring a large DevOps team while 
+prototyping application hosting in the cloud. What service allows you to
+ deploy your code with minimal oversight?</p>
+<ol id="c04-list-0074" type="a">
+<li>Elastic Beanstalk</li>
+<li>CloudFormation</li>
+<li>Elastic Transcoder</li>
+<li>JSON</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are tasked with reducing cost in an organization that does 
+several new application deployments every week. The company has a common
+ stack of resources but is spending time each deployment re-creating 
+this stack. What would help you reduce initial setup and deployment 
+costs?</p>
+<ol id="c04-list-0075" type="a">
+<li>Elastic Beanstalk</li>
+<li>CloudFormation</li>
+<li>AWS Trusted Adviso.</li>
+<li>Application load balancers</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need to transfer 50 TB of data into S3 and want to avoid lengthy 
+network exchanges and network saturation. What option would provide you 
+with inexpensive data transfer at a large scale?</p>
+<ol id="c04-list-0076" type="a">
+<li>Storage Gateway</li>
+<li>S3 Transfer Acceleration</li>
+<li>Glacier</li>
+<li>Snowball</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_149"></span>You
+ want to take advantage of a large data store on premises that is 
+already in use. How can you use this local storage while still 
+interfacing with an additional cloud-based storage system and 
+cloud-hosted EC2 instances?</p>
+<ol id="c04-list-0077" type="a">
+<li>Storage Gateway</li>
+<li>S3 Transfer Acceleration</li>
+<li>Glacier</li>
+<li>Snowball</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need to transfer several petabytes of data into AWS at the lowest possible costs. What AWS services could help?</p>
+<ol id="c04-list-0078" type="a">
+<li>Large Data Transfer Service</li>
+<li>S3 Transfer Acceleration</li>
+<li>Snowball</li>
+<li>CloudFront</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need an analytics solution to perform business intelligence on 
+your large data store. What AWS managed service can provide you with 
+OLAP that reduces cost at scale?</p>
+<ol id="c04-list-0079" type="a">
+<li>RDS</li>
+<li>Oracle on an EC2 fleet with provisioned IOPS EBS volumes</li>
+<li>Memcache</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are currently running a fleet of 12 EC2 instances and processing 
+large datasets that are uploaded by users. However, the cost of 
+maintaining these instances is increasing, and the maintenance of the 
+processing code is also growing. What AWS managed service would allow 
+you to reduce these costs and still process large datasets?</p>
+<ol id="c04-list-0080" type="a">
+<li>EMR</li>
+<li>Memcache</li>
+<li>CloudFront</li>
+<li>BigData Processing Service</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are in charge of building a business intelligence application 
+that can handle multiple data sources and perform analytics at a large 
+scale. Which of the following services and tools would allow you to 
+build a cost-effective solution? (Choose two.)</p>
+<ol id="c04-list-0081" type="a">
+<li>QuickSight</li>
+<li>Provisioned IOPS EBS volumes</li>
+<li>EC2 instances</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_150"></span>You
+ have been tasked with combining several data sources into a single 
+(optionally ephemeral) data store that you can then perform analysis on.
+ You currently have data in RDS, two DynamoDB instances, and multiple S3
+ buckets. What is the most cost-effective approach to handling this 
+task?</p>
+<ol id="c04-list-0082" type="a">
+<li>A fleet of EC2 instances with throughput optimized SSD EBS volumes</li>
+<li>A combination of CloudWatch, Lambda, and custom code</li>
+<li>Redshift</li>
+<li>QuickSight</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is the least expensive option for long-term data archival?</p>
+<ol id="c04-list-0083" type="a">
+<li>EFS</li>
+<li>EBS snapshots</li>
+<li>Glacier</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your company is paying a high cost for a consultant whose only job is
+ the provisioning of resources for new cloud deployments. What AWS 
+service would allow you to reduce this expenditure and move the 
+consulting into more of a business-serving capacity?</p>
+<ol id="c04-list-0084" type="a">
+<li>Elastic Beanstalk</li>
+<li>CloudTrail</li>
+<li>CloudShift</li>
+<li>CloudFormation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been tasked with reducing the costs associated with a large 
+fleet of EC2 instances that currently run several custom processes. 
+These processes collect and collate data from a number of streaming data
+ sources outside of your network. What AWS managed service could help 
+replace these instances?</p>
+<ol id="c04-list-0085" type="a">
+<li>CloudFront</li>
+<li>SDM</li>
+<li>Kinesis</li>
+<li>CloudFormation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been tasked with reducing the cost of a large group of EC2 
+instances that each serves a single process. The process is fired off 
+when a user initiates it through a web interface. Because these 
+processes are initiated often, a large fleet of EC2 instances is kept 
+active to serve the requests, incurring significant monthly costs. What 
+managed service could help you reduce the costs of these always-running 
+instances?</p>
+<ol id="c04-list-0086" type="a">
+<li>Lambda</li>
+<li>CloudFront</li>
+<li>Kinesis</li>
+<li>CloudFormation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_151"></span>You
+ are in charge of a cloud migration from an on-premises data center to 
+AWS. There are extensive software products used to monitor the 
+on-premises applications, and you want to reduce the recurring costs 
+associated with this monitoring. What AWS service would be ideal for 
+this task?</p>
+<ol id="c04-list-0087" type="a">
+<li>CloudTrail</li>
+<li>CloudMonitor</li>
+<li>AppMonitor</li>
+<li>CloudWatch</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are in charge of a cloud migration from an on-premises data 
+center to AWS. The system currently has a number of custom scripts that 
+process system and application logs for auditing purposes. What AWS 
+managed service could you use to replace these scripts and reduce the 
+need for instances to run these custom processes?</p>
+<ol id="c04-list-0088" type="a">
+<li>CloudTrail</li>
+<li>CloudMonitor</li>
+<li>AppMonitor</li>
+<li>CloudWatch</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are the architect in charge of designing a database-driven 
+application suite. As part of the project, you need to migrate a large 
+Oracle database instance into the cloud. Further, you are migrating from
+ Oracle to PostgreSQL. How would you most effectively accomplish this 
+migration with the least expenditure?</p>
+<ol id="c04-list-0089" type="a">
+<li>Copy the Oracle data to Snowball, send the data to AWS, move it into S3, and then import the data into PostgreSQL in RDS.</li>
+<li>Create an RDS Oracle instance in AWS, migrate the data from the 
+existing Oracle instance to the new RDS instance, and then convert the 
+RDS instance to PostgreSQL.</li>
+<li>Use the Database Migration Service to import the Oracle data directly into a new PostgreSQL instance.</li>
+<li>Create a local PostgreSQL instance, migrate the data locally from 
+Oracle to PostgreSQL, and then move the PostgreSQL instance into AWS.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need to choose a scalable, cost-effective, and highly durable 
+solution for storing flat files. What AWS service would you use?</p>
+<ol id="c04-list-0090" type="a">
+<li>S3</li>
+<li>Kinesis</li>
+<li>DynamoDB</li>
+<li>Aurora</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_152"></span>You
+ have been tasked with replacing a legacy LDAP directory server that 
+manages users, groups, and permissions with a cloud-based solution in 
+order to reduce maintenance costs for the current directory server. What
+ AWS service should you investigate?</p>
+<ol id="c04-list-0091" type="a">
+<li>IAM</li>
+<li>Cognito</li>
+<li>AWS Organizations</li>
+<li>AWS Directory Server</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been tasked with replacing a legacy LDAP directory server 
+that manages users, groups, and permissions and provides single sign-on 
+capabilities with a cloud-based solution in order to reduce maintenance 
+costs for the current directory server and codebase. What AWS services 
+should you investigate? (Choose two.)</p>
+<ol id="c04-list-0092" type="a">
+<li>IAM</li>
+<li>Cognito</li>
+<li>AWS Organizations</li>
+<li>AWS Directory Server</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are new on a project that makes heavy use of AWS. Your first 
+priority is to reduce costs and identify security risks. What tool could
+ you use to scan the existing environment and set initial priorities for
+ change?</p>
+<ol id="c04-list-0093" type="a">
+<li>CloudTrail</li>
+<li>Trusted Advisor</li>
+<li>AWS Organizations</li>
+<li>AWS Directory Server</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are migrating a large on-premises application suite to AWS. Your 
+company has made a significant investment in Chef for configuration and 
+management and doesn’t want to lose the investment in time and money 
+that the Chef tool represents. How could you preserve this functionality
+ and keep costs low?</p>
+<ol id="c04-list-0094" type="a">
+<li>CloudTrail</li>
+<li>CloudWatch</li>
+<li>OpsWorks</li>
+<li>Service Catalog</li>
+</ol></div>
+</li></ol>
+</section>
+</section>
+</section>
+</section>
+<div class="annotator-outer annotator-viewer viewer annotator-hide">
+  <ul class="annotator-widget annotator-listing"></ul>
+</div><div class="annotator-modal-wrapper annotator-editor-modal annotator-editor annotator-hide">
+	<div class="annotator-outer editor">
+		<h2 class="title">Highlight</h2>
+		<form class="annotator-widget">
+			<ul class="annotator-listing">
+			<li class="annotator-item"><textarea id="annotator-field-3" placeholder="Add a note using markdown (optional)" class="js-editor" maxlength="750"></textarea></li></ul>
+			<div class="annotator-controls">
+				<a class="link-to-markdown" href="https://daringfireball.net/projects/markdown/basics" target="_blank">?</a>
+				<ul>
+					<li class="delete annotator-hide"><a href="#delete" class="annotator-delete-note button positive">Delete Note</a></li>
+					<li class="save"><a href="#save" class="annotator-save annotator-focus button positive">Save Note</a></li>
+					<li class="cancel"><a href="#cancel" class="annotator-cancel button">Cancel</a></li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div><div class="annotator-modal-wrapper annotator-delete-confirm-modal" style="display: none;">
+  <div class="annotator-outer">
+    <h2 class="title">Highlight</h2>
+      <a class="js-close-delete-confirm annotator-cancel close" href="#close">Close</a>
+      <div class="annotator-widget">
+         <div class="delete-confirm">
+            Are you sure you want to permanently delete this note?
+         </div>
+         <div class="annotator-controls">
+            <a href="#cancel" class="annotator-cancel button js-cancel-delete-confirm">No, I changed my mind</a>
+            <a href="#delete" class="annotator-delete button positive js-delete-confirm">Yes, delete it</a>
+         </div>
+       </div>
+   </div>
+</div><div class="annotator-adder" style="display: none;">
+	<ul class="adders">
+		
+		<li class="copy"><a href="#">Copy</a></li>
+		
+		<li class="add-highlight"><a href="#">Add Highlight</a></li>
+		<li class="add-note"><a href="#">
+			Add Note
+		</a></li>
+		
+	</ul>
+</div></div></div>
+
+
+
+  <div class="t-sbo-prev sbo-prev sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c03.xhtml" class="prev nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-prev-label">Prev</span>
+          <span class="visuallyhidden">Previous Chapter</span>
+          <div class="pagination-title t-prev-title">Chapter 3 Domain 3: Specify Secure Applications and Architectures</div>
+        </a>
+    
+  
+  </div>
+
+  <div class="t-sbo-next sbo-next sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c05.xhtml" class="next nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-next-label">Next</span>
+          <span class="visuallyhidden">Next Chapter</span>
+          <div class="pagination-title t-next-title">Chapter 5 Domain 5: Define Operationally Excellent Architectures</div>
+        </a>
+    
+  
+  </div>
+
+</section>
+  </div>
+<section class="sbo-saved-archives"></section>
+
+<script>
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  context = {
+    product: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      type: 'book',
+      identifier: '9781119558439',
+      topic: 'Amazon Web Services (AWS)'
+    },
+    content: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      formatType: 'book',
+      identifier: '9781119558439',
+      author: 'Brett McLaughlin',
+      publisher: decodeHtml('Sybex'),
+      releaseDate: '2019-03-19',
+      parentTopic: 'none',
+      free: 'no',
+      subdirectory: 'none'
+    }
+  }
+  dataLayer.push(context);
+</script>
+
+
+
+          
+          
+  
+
+
+
+
+    
+    
+
+
+
+        
+      </div>
+      
+        
+
+
+<footer class="pagefoot t-pagefoot">
+  <a href="#" class="icon-up" style="display: none;"><div class="visuallyhidden">Back to top</div></a>
+  <ul class="js-footer-nav">
+  
+    
+    <li><a href="https://learning.oreilly.com/u/preferences/">Settings</a></li>
+    
+    <li><a href="https://learning.oreilly.com/public/support/">Support</a></li>
+    
+    <li><a href="https://learning.oreilly.com/accounts/logout/">Sign Out</a></li>
+    
+  
+  
+  </ul>
+  <span class="copyright">© 2019 <a href="https://learning.oreilly.com/" target="_blank">O'Reilly Media, Inc</a>.</span>
+  
+    
+    <a href="https://www.oreilly.com/terms/">Terms of Service</a> 
+     / 
+    
+    <a href="https://learning.oreilly.com/privacy">Privacy Policy</a> 
+    
+    
+  
+</footer>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":2,"licenseKey":"510f1a6865","transactionName":"YgdaZ0NSW0cEB0RdWltNfkZfUEFdCgofXFBHDVYdR1pQQxZeRl1QQj1aWkU=","applicationID":"172641827,79672898,93931619","errorBeacon":"bam.nr-data.net","agent":"","applicationTime":1557}</script>
+
+      
+    
+    <script src="Chapter04_Domain_4_Design_Cost-Optimized_Architectures_files/a_005" charset="utf-8"></script>
+    <script src="Chapter04_Domain_4_Design_Cost-Optimized_Architectures_files/a_004" charset="utf-8"></script>
+  
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1732687426968531");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1732687426968531&amp;ev=PageView&amp;noscript=1"></noscript><script type="text/javascript" id="">(function(){window.medalliaUserIdentifier=document.documentElement.dataset.userUuid;window.medalliaUserName=document.documentElement.dataset.username})();</script>
+<script type="text/javascript" id="" src="Chapter04_Domain_4_Design_Cost-Optimized_Architectures_files/embed.js"></script>
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("set","agent","tmgoogletagmanager","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="">window._pp=window._pp||[];if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/register/")_pp.targetUrl="/confirm/trial";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/subscribe/")_pp.targetUrl="/confirm/paid";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/signup/")_pp.targetUrl="/confirm/paid";_pp.siteId="2508";
+_pp.siteUId="ea1e33a9-826b-46a8-b2ee-42219d1a3cea";_pp.orderValue="undefined";_pp.orderId="undefined";(function(){var ppjs=document.createElement("script");ppjs.type="text/javascript";ppjs.async=true;ppjs.src=("https:"==document.location.protocol?"https:":"http:")+"//cdn.pbbl.co/r/"+_pp.siteId+".js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ppjs,s)})();</script><div class="annotator-notice"></div><script type="text/javascript" async="" src="Chapter04_Domain_4_Design_Cost-Optimized_Architectures_files/generic1575498018713.js" charset="UTF-8"></script><div class="font-flyout" style="top: 201.031px; left: 1280px;"><div class="font-controls-panel">
+	<div class="nightmodes">
+		<ul>
+			<li class="day"><a href="#" id="day-mode" title="Day Mode">
+				<i class="fa fa-sun-o"></i>
+				<span>Day Mode</span></a></li>
+			<li class="cloudy"><a href="#" id="cloudy-mode" title="Cloudy Mode">
+				<i class="fa fa-cloud"></i>
+				<span>Cloud Mode</span>
+			</a></li>
+			<li class="night"><a href="#" id="night-mode" title="Night Mode">
+				<i class="fa fa-moon-o"></i>
+				<span>Night Mode</span>
+			</a></li>
+		</ul>
+	</div>
+
+	<div class="font-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-font left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-font-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-font right"></i>
+		</div>
+	</div>
+
+	<div class="column-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-compress left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-column-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-expand right"></i>
+		</div>
+	</div>
+
+	<a id="reset" class="button" href="#">Reset</a>
+</div>
+</div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.8199979764699815"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.08838313581766866" alt="" src="Chapter04_Domain_4_Design_Cost-Optimized_Architectures_files/0.txt" width="0" height="0"></div><div style="display: none; visibility: hidden;"><script>(function(){if(null!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')&&void 0!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')){var a=!1;window.addEventListener("blur",function(){a&&dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"facebook",eventVal:0,nonInteraction:0})});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseover",function(){window.focus();
+a=!0});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseout",function(){a=!1})}try{window.twttr=function(b,a,d){var c,e=b.getElementsByTagName(a)[0];if(!b.getElementById(d))return b=b.createElement(a),b.id=d,b.src="//platform.twitter.com/widgets.js",e.parentNode.insertBefore(b,e),window.twttr||(c={_e:[],ready:function(a){c._e.push(a)}})}(document,"script","twitter-wjs"),twttr.ready(function(a){a.events.bind("tweet",trackTwitter)})}catch(b){}})();
+null!==document.querySelector(".IN-widget")&&void 0!==document.querySelector(".IN-widget")&&document.querySelector(".IN-widget").addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"linkedin",eventVal:0,nonInteraction:0})});
+function trackTwitter(a){a&&(a.target&&"IFRAME"==a.target.nodeName&&(opt_target=extractParamFromUri(a.target.src,"url")),dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"twitter",eventVal:0,nonInteraction:0}))}function extractParamFromUri(a,b){if(a){var c=new RegExp("[\\?\x26#]"+b+"\x3d([^\x26#]*)");c=c.exec(a);if(null!=c)return unescape(c[1])}};</script></div><script type="text/javascript" id="">function forceInputUppercase(a){var b=a.target.selectionStart,c=a.target.selectionEnd;a.target.value=a.target.value.toUpperCase();a.target.setSelectionRange(b,c)}void 0!=document.getElementById("id_promotion")&&null!=document.getElementById("id_promotion")&&document.getElementById("id_promotion").addEventListener("keyup",forceInputUppercase,!1);
+void 0!=document.getElementsByName("promotionCode")[0]&&null!=document.getElementsByName("promotionCode")[0]&&document.getElementsByName("promotionCode")[0].addEventListener("keyup",forceInputUppercase,!1);</script><script type="text/javascript" id="">var nonwExpandable=document.querySelectorAll(".orm-ff-NavigationSubnav-headerListItem a, .orm-ff-NavigationView-headerListItem a");nonwExpandable.forEach(function(a,b){b+1!=nonwExpandable.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):b+1==nonwExpandable.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var nonwExpandableFo=document.querySelectorAll(".drop-content li:not(.flyout-parent) a");
+nonwExpandableFo.forEach(function(a,b){"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1!=nonwExpandableFo.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1==nonwExpandableFo.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var expandable=document.querySelectorAll(".orm-ff-NavigationSubnav-toggleControls a, .orm-ff-NavigationView-toggleControls a");expandable.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.parentNode.parentNode.parentNode.querySelectorAll(".orm-Button-btnContentWrap span")[0].childNodes[1].textContent+" | "+a.textContent})})});var flyoutLinks=document.querySelectorAll(".flyout a");
+flyoutLinks.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.closest("li.flyout-parent").getElementsByTagName("a")[0].textContent+" | "+a.textContent})})});</script><span><div id="KampyleAnimationContainer" style="z-index: 2147483000; border: 0px none; position: fixed; display: block; width: 0px; height: 0px;"></div></span><iframe scrolling="no" allowtransparency="true" src="Chapter04_Domain_4_Design_Cost-Optimized_Architectures_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe></body></html>

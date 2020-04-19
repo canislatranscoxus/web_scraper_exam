@@ -1,0 +1,836 @@
+<!--[if IE]><![endif]-->
+<!DOCTYPE html>
+
+<header>
+<h1><a id="start"></a><span epub:type="pagebreak" role="doc-pagebreak" id="Page_153"></span><span class="chapterNumber">Chapter 5</span><br><span class="chapterTitle">Domain 5: Define Operationally Excellent Architectures</span></h1>
+</header>
+<section id="c05-sec-0001">
+<section class="exercises">
+<h2><span epub:type="pagebreak" role="doc-pagebreak" id="Page_154"></span><a id="c05-exsec-0001"></a>Review Questions</h2>
+<section class="questionSet">
+<ol class="questionList">
+<li class="essay">
+<div class="question">
+<p>How many times will a message be delivered when using a standard SQS queue?</p>
+<ol id="c05-list-0001" type="a">
+<li>Once and only once</li>
+<li>At least once</li>
+<li>Once for each request of the relevant message in the queue</li>
+<li>The answer is application dependent.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following services allow you to access the underlying operating system? (Choose two.)</p>
+<ol id="c05-list-0002" type="a">
+<li>RDS</li>
+<li>EC2</li>
+<li>EMR</li>
+<li>DynamoDB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are using an SQS queue in your web application. You are able to 
+confirm that messages in the queue are being picked up by application 
+instances for processing, but then nothing happens for over 12 hours. 
+Then, after that period of time, the message appears in the queue again 
+and processing restarts. What could be occurring?</p>
+<ol id="c05-list-0003" type="a">
+<li>The SQS queue has a visibility timeout that is set too high. The 
+timeout should be reduced so that application instances can process the 
+message more quickly.</li>
+<li>SQS messages expire every 12 hours and must be reentered into the 
+queue. The time that the message is invisible triggers the queue to ask 
+for and receive the message from the original sender.</li>
+<li>Processing is failing, or not completing, in the application 
+instance. The message disappears because the SQS queue keeps it 
+“invisible” for 12 hours while it is being processed. The message is 
+then returned to the queue for processing if not handled prior to that 
+timeout.</li>
+<li>Your SQS queue needs to be restarted; it is likely not correctly 
+queuing messages. The polling interval is also set too high, causing the
+ long lack of visibility of the message.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a valid method of performing actions on an EBS snapshot?</p>
+<ol id="c05-list-0004" type="a">
+<li>Use the AWS console with a username and password.</li>
+<li>Use the AWS CLI with an application key.</li>
+<li>Use the AWS REST APIs with an application key.</li>
+<li>All of the above</li>
+<li>None of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_155"></span>Which of the following is most like a mailing list?</p>
+<ol id="c05-list-0005" type="a">
+<li>SQS</li>
+<li>SNS</li>
+<li>SWF</li>
+<li>S3</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In which of the following managed services are messages not pushed?</p>
+<ol id="c05-list-0006" type="a">
+<li>SQS</li>
+<li>SNS</li>
+<li>SWF</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In which of the following managed services can messages be pulled by an application?</p>
+<ol id="c05-list-0007" type="a">
+<li>SWF</li>
+<li>SQS</li>
+<li>SNS</li>
+<li>S3</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following managed services guarantees single assignment of a message?</p>
+<ol id="c05-list-0008" type="a">
+<li>S3</li>
+<li>SQS</li>
+<li>SNS</li>
+<li>SWF</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following managed services calls the messages it receives tasks?</p>
+<ol id="c05-list-0009" type="a">
+<li>S3</li>
+<li>SWF</li>
+<li>SNS</li>
+<li>SQS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following managed services calls the messages it receives notifications?</p>
+<ol id="c05-list-0010" type="a">
+<li>S3</li>
+<li>SWF</li>
+<li>SNS</li>
+<li>SQS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following managed services calls the messages it receives “messages”?</p>
+<ol id="c05-list-0011" type="a">
+<li>S3</li>
+<li>SWF</li>
+<li>SNS</li>
+<li>None of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_156"></span>Which of the following managed services coordinates activities between different applications?</p>
+<ol id="c05-list-0012" type="a">
+<li>S3</li>
+<li>SNS</li>
+<li>SWF</li>
+<li>SQS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does SWF stand for?</p>
+<ol id="c05-list-0013" type="a">
+<li>Simple Workflow Foundation</li>
+<li>Simple Workflow Service</li>
+<li>Sequential Workflow Service</li>
+<li>Synchronous Workflow Foundation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What services are suitable for running compute-intensive custom scripts? (Choose two.)</p>
+<ol id="c05-list-0014" type="a">
+<li>EC2</li>
+<li>S3</li>
+<li>Redshift</li>
+<li>ECS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which AWS service is ideal for hosting a website while requiring the least amount of AWS staff and knowledge?</p>
+<ol id="c05-list-0015" type="a">
+<li>S3 website hosting</li>
+<li>Amazon Lightsail</li>
+<li>EC2</li>
+<li>ECS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a registered AMI using an EBS volume as a root device, 
+created from a volume snapshot. However, you have detected malicious 
+code running in the EBS volume and want to remove the AMI and delete the
+ EBS volume and its snapshot. What steps are required? (Choose two.)</p>
+<ol id="c05-list-0016" type="a">
+<li>Immediately delete the EBS volume snapshot.</li>
+<li>Immediately deregister the AMI.</li>
+<li>After the EBS volume has been deleted, deregister the AMI.</li>
+<li>After the AMI has been deregistered, remove the AMI, and delete the EBS volume and its snapshot.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following AWS CLI commands is used to operate upon EBS volumes?</p>
+<ol id="c05-list-0017" type="a">
+<li><span class="codeLabel">aws ec2 [command]</span></li>
+<li><span class="codeLabel">aws ebs [command]</span></li>
+<li><span class="codeLabel">aws instance [command]</span></li>
+<li>You cannot operate upon EBS volumes directly from the AWS CLI.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_157"></span>You have a website running at <span class="codeLabel"><a href="http://applestoapples.net/">applestoapples.net</a></span>.
+ However, many of your users have mistakenly entered in 
+applestoapples.com as the URL in their browser. To correct this, you’ve 
+recently purchased the additional domain <span class="codeLabel"><a href="http://applestoapples.com/">applestoapples.com</a></span> and now want to point all requests to this domain to <span class="codeLabel"><a href="http://applestoapples.net/">applestoapples.net</a></span>. Which DNS record set would you use?</p>
+<ol id="c05-list-0018" type="a">
+<li>MX</li>
+<li>AAAA</li>
+<li>CNAME</li>
+<li>A</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your website has mostly static content, but you are adding a new 
+section driven by an EC2 instance fleet behind an Elastic Load Balancer.
+ You want to create a subdomain and direct all traffic to that subdomain
+ toward the ELB. Which DNS record set would you use?</p>
+<ol id="c05-list-0019" type="a">
+<li>CNAME</li>
+<li>AAAA</li>
+<li>SOA</li>
+<li>MX</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your domain is hosted and managed by Route 53. You want to create a 
+new subdomain and point it to a fleet of EC2 instances behind an 
+application load balancer. What is the best approach to this?</p>
+<ol id="c05-list-0020" type="a">
+<li>Create an A record and configure it as an alias to the ALB.</li>
+<li>Create a CNAME record pointed at the URL of the ALB.</li>
+<li>Create an A record pointed at the IP address of the ALB.</li>
+<li>Set the ALB to send a redirect header to clients with the IP addresses of the currently active EC2 instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Does Route 53 supports zone apex records?</p>
+<ol id="c05-list-0021" type="a">
+<li>Yes, for all domains</li>
+<li>Yes, but only for domains hosted on AWS</li>
+<li>Yes, but only for services hosted on AWS</li>
+<li>No</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements are false? (Choose two.)</p>
+<ol id="c05-list-0022" type="a">
+<li>Route 53 does not allow aliases for naked domain names.</li>
+<li>Route 53 supports zone apex records.</li>
+<li>Route 53 allows aliases for domains hosted on AWS.</li>
+<li>Route 53 only supports zone apex records for AWS-hosted services.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements are true? (Choose two.)</p>
+<ol id="c05-list-0023" type="a">
+<li>Route 53 supports Auto Scaling groups.</li>
+<li>Route 53 automatically configures DNS health checks for registered domains.</li>
+<li>Route 53 automatically sets up Auto Scaling groups for services to which it points.</li>
+<li>Route 53 is automatically highly available.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_158"></span>How many domain names can you manage using Route 53?</p>
+<ol id="c05-list-0024" type="a">
+<li>50</li>
+<li>100, but you can raise that limit by contacting AWS support.</li>
+<li>Unlimited</li>
+<li>50, but you can raise that limit by contacting AWS support.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is the best approach to accessing an RDS instance to troubleshoot operating system problems?</p>
+<ol id="c05-list-0025" type="a">
+<li>SSH</li>
+<li>RDP</li>
+<li>SFTP</li>
+<li>None of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are true about VPC peering? (Choose two.)</p>
+<ol id="c05-list-0026" type="a">
+<li>A VPC peering connection is a networking connection between two VPCs within a single region.</li>
+<li>A VPC peering connection is a VPN-based connection.</li>
+<li>A VPC peering connection can help facilitate data transfer and file sharing.</li>
+<li>Peered VPCs can exist in different regions.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have two VPCs paired across two different regions. What is another name for this type of connection?</p>
+<ol id="c05-list-0027" type="a">
+<li>Inter-VPC peering connection</li>
+<li>Inter-region VPC peering connection</li>
+<li>Inter-VPC region connection</li>
+<li>Multi-region peering connection</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements about peered VPCs is false?</p>
+<ol id="c05-list-0028" type="a">
+<li>Both VPCs do not need to be within the same region.</li>
+<li>Both VPCs do not need to be in the same AWS account.</li>
+<li>Both VPCs will automatically have routing set up when the connection is created.</li>
+<li>Traffic can flow in both directions between peered VPCs by default.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements about peered VPCs is true?</p>
+<ol id="c05-list-0029" type="a">
+<li>Both VPCs need to be within the same region.</li>
+<li>Both VPCs need to be in the same AWS account.</li>
+<li>Each VPC must use a unique security group.</li>
+<li>The two VPCs cannot have overlapping CIDR blocks.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_159"></span>What kind of relationship is a VPC peering connection?</p>
+<ol id="c05-list-0030" type="a">
+<li>One-to-one between subnets</li>
+<li>One-to-one between VPCs</li>
+<li>One-to-many between subnets</li>
+<li>One-to-many between VPCs</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>VPC A is peered to both VPC B and VPC C. How can you allow traffic to flow from VPC B to VPC C?</p>
+<ol id="c05-list-0031" type="a">
+<li>You can’t; transitive peering relationships are not allowed in AWS.</li>
+<li>You must enable route forwarding in VPC A.</li>
+<li>You must peer VPC B to VPC C.</li>
+<li>You must enable route forwarding on VPC B.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>VPC C has an overlapping CIDR block with VPC D. Given that, which of the following statements are true? (Choose two.)</p>
+<ol id="c05-list-0032" type="a">
+<li>VPC C and VPC D can be peered as is.</li>
+<li>VPC C and VPC D cannot be peered as is.</li>
+<li>To peer VPC C and VPC D, you must remove the overlap in their CIDR block.</li>
+<li>To peer VPC C and VPC D, you must switch one to use IPv6 addresses.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many peering connections are allowed between two VPCs?</p>
+<ol id="c05-list-0033" type="a">
+<li>One</li>
+<li>Two</li>
+<li>One for each subnet in each VPC</li>
+<li>One for each NACL associated with each VPC</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many peering connections can a single VPC be a part of?</p>
+<ol id="c05-list-0034" type="a">
+<li>One</li>
+<li>Unlimited, within AWS overall account limits</li>
+<li>One for each subnet in each VPC</li>
+<li>One for each NACL associated with each VPC</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How does AWS facilitate transitive peering VPC relationships?</p>
+<ol id="c05-list-0035" type="a">
+<li>Transitive VPC relationships are only allowed if a bastion host is used.</li>
+<li>Transitive VPC relationships are only allowed if a hub-and-spoke network model is used.</li>
+<li>It does not; transitive VPC peering is not allowed in AWS.</li>
+<li>It uses IPv4 for connection from a source VPC to a hub VPC and IPv6 from the hub to the origin VPC.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_160"></span>How does AWS support IPv6 communication in a VPC peering relationship? (Choose two.)</p>
+<ol id="c05-list-0036" type="a">
+<li>AWS does not support IPv6 communication in VPC peering.</li>
+<li>You must associate IPv6 addresses with both VPCs and then set up routing to use these addresses.</li>
+<li>You must associate IPv6 addresses with both VPCs and then set up a security group to use these addresses.</li>
+<li>You must make sure the two VPCs are in the same region.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are advantages of launching instances into a VPC as opposed to EC2-Classic? (Choose two.)</p>
+<ol id="c05-list-0037" type="a">
+<li>You can assign multiple IP addresses to your instances.</li>
+<li>Your instances automatically run on multi-tenant hardware.</li>
+<li>You can attach multiple network interfaces to your instances.</li>
+<li>Your network is flat instead of layered.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are differences between the default VPC and a custom VPC? (Choose two.)</p>
+<ol id="c05-list-0038" type="a">
+<li>Default VPCs have an internet gateway but custom VPCs do not.</li>
+<li>Custom VPCs have public subnets but default VPCs do not.</li>
+<li>Custom VPCs have an internet gateway but default VPCs do not.</li>
+<li>Default VPCs have public subnets but custom VPCs do not.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How does the default VPC make instances in its public subnets available to Internet traffic? (Choose two.)</p>
+<ol id="c05-list-0039" type="a">
+<li>Through a default routing table that provides routing to the Internet</li>
+<li>Through a virtual private gateway</li>
+<li>Through a default security group that provides access out to the Internet</li>
+<li>Through an internet gateway</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is assigned to instances launched into non-default subnets?</p>
+<ol id="c05-list-0041" type="a">
+<li>A private IPv6 address</li>
+<li>A public IPv4 address</li>
+<li>A private IPv4 address</li>
+<li>A public IPv6 address</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_161"></span>You want to provide Internet access for an instance in a non-default subnet. What do you need to do? (Choose two.)</p>
+<ol id="c05-list-0042" type="a">
+<li>Assign a private IP address to the instance.</li>
+<li>Assign a public IP address to the instance.</li>
+<li>Attach an internet gateway to the VPC in which the subnet resides.</li>
+<li>Attach a NAT instance to the subnet.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What technology can you use to provide single sign-on to the AWS management console?</p>
+<ol id="c05-list-0043" type="a">
+<li>JSON</li>
+<li>CloudFormation</li>
+<li>YAML</li>
+<li>SAML</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have created a new user in IAM. What default permissions does that user have?</p>
+<ol id="c05-list-0044" type="a">
+<li>Read access to all AWS services</li>
+<li>Read and write access to all AWS services</li>
+<li>No access to any AWS services</li>
+<li>Read access only to the IAM service</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does IAM stand for?</p>
+<ol id="c05-list-0045" type="a">
+<li>Interoperative Access Management</li>
+<li>Identity and Access Management</li>
+<li>Independent Access Management</li>
+<li>Identity and Authorization Management</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have created a new IAM user and created their sign-in URL. You 
+give the user their URL. What else will they need to log in to the AWS 
+management console? (Choose two.)</p>
+<ol id="c05-list-0046" type="a">
+<li>Their username</li>
+<li>Their access key ID</li>
+<li>Their password</li>
+<li>Their secret access key</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following IAM groups will allow users within it to interact with all AWS services?</p>
+<ol id="c05-list-0047" type="a">
+<li>Administrator</li>
+<li>Power User</li>
+<li>The default IAM permissions provide this level of access.</li>
+<li>Support User</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_162"></span>You
+ have created a new IAM user and given the credentials to the user. 
+However, she still is unable to log in to the AWS management console. 
+What might the problem be?</p>
+<ol id="c05-list-0048" type="a">
+<li>You have not enabled Multi-Factor Authentication.</li>
+<li>You have not enabled the User Login policy.</li>
+<li>You have not provided the user her access key ID.</li>
+<li>You have not provided the user her customized sign-in link.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been tasked with building an application that provides 
+backend servicing for a mobile game with millions of users. Which of the
+ following services might you use to receive and process the messages 
+that the mobile clients send?</p>
+<ol id="c05-list-0049" type="a">
+<li>EC2, Mobile SDK</li>
+<li>Amazon Kinesis, Mobile SDK</li>
+<li>Amazon Kinesis, RDS</li>
+<li>EC2, Lambda</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is required to set up a new AWS account for a company new to AWS?</p>
+<ol id="c05-list-0050" type="a">
+<li>Company name</li>
+<li>Company email</li>
+<li>Company account-holder username</li>
+<li>Company URL</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following AWS-defined IAM policies offer read and write access to the S3 and EC2 services? (Choose two.)</p>
+<ol id="c05-list-0051" type="a">
+<li>Administrator</li>
+<li>Network Administrator</li>
+<li>Support User</li>
+<li>Power User</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does AWS call a document that defines a set of one or more permissions?</p>
+<ol id="c05-list-0052" type="a">
+<li>Program unit</li>
+<li>Organizational unit</li>
+<li>Policy</li>
+<li>Group</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does the AWS service abbreviated as ECS stand for?</p>
+<ol id="c05-list-0053" type="a">
+<li>Elastic Compute Service</li>
+<li>Elastic Container Service</li>
+<li>Elastic Computer Service</li>
+<li>Encapsulated Container Service</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_163"></span>Which of the following are advantages of using containers for applications in AWS compared to using EC2 instances? (Choose two.)</p>
+<ol id="c05-list-0054" type="a">
+<li>You can scale applications automatically.</li>
+<li>You can run larger applications in a container.</li>
+<li>You can reduce the startup time of applications.</li>
+<li>You can avoid having to explicitly manage and provision servers.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following sets of services are used in a typical AWS container stack?</p>
+<ol id="c05-list-0055" type="a">
+<li>ECR, ECS, EC2</li>
+<li>ECS, EMR, EC2</li>
+<li>Fargate, ECS, S3</li>
+<li>ECR, ECS, S3</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following services is typically associated with ECS?</p>
+<ol id="c05-list-0056" type="a">
+<li>EMR</li>
+<li>S3</li>
+<li>ECR</li>
+<li>ECC</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are good reasons to consider using containers in AWS for your applications? (Choose two.)</p>
+<ol id="c05-list-0057" type="a">
+<li>You want to reduce overall cost.</li>
+<li>You want to more effectively use your existing compute instances.</li>
+<li>You have limited resources for managing your existing EC2 instances.</li>
+<li>You need to scale up and down your applications.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are differences between container-based applications and Lambda-based ones? (Choose two.)</p>
+<ol id="c05-list-0058" type="a">
+<li>Containers scale based on load and usage; Lambda scales based on events.</li>
+<li>Containers live on underlying compute instances; Lambda code does not.</li>
+<li>Containers are not as highly scalable as Lambda.</li>
+<li>Containers can run entire application stacks; Lambda can only run isolated chunks of code.</li>
+</ol></div>
+</li></ol>
+</section>
+</section>
+</section>
+</section>
+<div class="annotator-outer annotator-viewer viewer annotator-hide">
+  <ul class="annotator-widget annotator-listing"></ul>
+</div><div class="annotator-modal-wrapper annotator-editor-modal annotator-editor annotator-hide">
+	<div class="annotator-outer editor">
+		<h2 class="title">Highlight</h2>
+		<form class="annotator-widget">
+			<ul class="annotator-listing">
+			<li class="annotator-item"><textarea id="annotator-field-4" placeholder="Add a note using markdown (optional)" class="js-editor" maxlength="750"></textarea></li></ul>
+			<div class="annotator-controls">
+				<a class="link-to-markdown" href="https://daringfireball.net/projects/markdown/basics" target="_blank">?</a>
+				<ul>
+					<li class="delete annotator-hide"><a href="#delete" class="annotator-delete-note button positive">Delete Note</a></li>
+					<li class="save"><a href="#save" class="annotator-save annotator-focus button positive">Save Note</a></li>
+					<li class="cancel"><a href="#cancel" class="annotator-cancel button">Cancel</a></li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div><div class="annotator-modal-wrapper annotator-delete-confirm-modal" style="display: none;">
+  <div class="annotator-outer">
+    <h2 class="title">Highlight</h2>
+      <a class="js-close-delete-confirm annotator-cancel close" href="#close">Close</a>
+      <div class="annotator-widget">
+         <div class="delete-confirm">
+            Are you sure you want to permanently delete this note?
+         </div>
+         <div class="annotator-controls">
+            <a href="#cancel" class="annotator-cancel button js-cancel-delete-confirm">No, I changed my mind</a>
+            <a href="#delete" class="annotator-delete button positive js-delete-confirm">Yes, delete it</a>
+         </div>
+       </div>
+   </div>
+</div><div class="annotator-adder" style="display: none;">
+	<ul class="adders">
+		
+		<li class="copy"><a href="#">Copy</a></li>
+		
+		<li class="add-highlight"><a href="#">Add Highlight</a></li>
+		<li class="add-note"><a href="#">
+			Add Note
+		</a></li>
+		
+	</ul>
+</div></div></div>
+
+
+
+  <div class="t-sbo-prev sbo-prev sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c04.xhtml" class="prev nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-prev-label">Prev</span>
+          <span class="visuallyhidden">Previous Chapter</span>
+          <div class="pagination-title t-prev-title">Chapter 4 Domain 4: Design Cost-Optimized Architectures</div>
+        </a>
+    
+  
+  </div>
+
+  <div class="t-sbo-next sbo-next sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c06.xhtml" class="next nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-next-label">Next</span>
+          <span class="visuallyhidden">Next Chapter</span>
+          <div class="pagination-title t-next-title">Chapter 6 Practice Test</div>
+        </a>
+    
+  
+  </div>
+
+</section>
+  </div>
+<section class="sbo-saved-archives"></section>
+
+<script>
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  context = {
+    product: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      type: 'book',
+      identifier: '9781119558439',
+      topic: 'Amazon Web Services (AWS)'
+    },
+    content: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      formatType: 'book',
+      identifier: '9781119558439',
+      author: 'Brett McLaughlin',
+      publisher: decodeHtml('Sybex'),
+      releaseDate: '2019-03-19',
+      parentTopic: 'none',
+      free: 'no',
+      subdirectory: 'none'
+    }
+  }
+  dataLayer.push(context);
+</script>
+
+
+
+          
+          
+  
+
+
+
+
+    
+    
+
+
+
+        
+      </div>
+      
+        
+
+
+<footer class="pagefoot t-pagefoot">
+  <a href="#" class="icon-up" style="display: none;"><div class="visuallyhidden">Back to top</div></a>
+  <ul class="js-footer-nav">
+  
+    
+    <li><a href="https://learning.oreilly.com/u/preferences/">Settings</a></li>
+    
+    <li><a href="https://learning.oreilly.com/public/support/">Support</a></li>
+    
+    <li><a href="https://learning.oreilly.com/accounts/logout/">Sign Out</a></li>
+    
+  
+  
+  </ul>
+  <span class="copyright">© 2019 <a href="https://learning.oreilly.com/" target="_blank">O'Reilly Media, Inc</a>.</span>
+  
+    
+    <a href="https://www.oreilly.com/terms/">Terms of Service</a> 
+     / 
+    
+    <a href="https://learning.oreilly.com/privacy">Privacy Policy</a> 
+    
+    
+  
+</footer>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":2,"licenseKey":"510f1a6865","transactionName":"YgdaZ0NSW0cEB0RdWltNfkZfUEFdCgofXFBHDVYdR1pQQxZeRl1QQj1aWkU=","applicationID":"172641827,79672898,93931619","errorBeacon":"bam.nr-data.net","agent":"","applicationTime":1557}</script>
+
+      
+    
+    <script src="Chapter05_Domain_5_Define_Operationally_Excellent_Architectures_files/a_005" charset="utf-8"></script>
+    <script src="Chapter05_Domain_5_Define_Operationally_Excellent_Architectures_files/a_004" charset="utf-8"></script>
+  
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1732687426968531");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1732687426968531&amp;ev=PageView&amp;noscript=1"></noscript><script type="text/javascript" id="">(function(){window.medalliaUserIdentifier=document.documentElement.dataset.userUuid;window.medalliaUserName=document.documentElement.dataset.username})();</script>
+<script type="text/javascript" id="" src="Chapter05_Domain_5_Define_Operationally_Excellent_Architectures_files/embed.js"></script>
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("set","agent","tmgoogletagmanager","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="">window._pp=window._pp||[];if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/register/")_pp.targetUrl="/confirm/trial";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/subscribe/")_pp.targetUrl="/confirm/paid";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/signup/")_pp.targetUrl="/confirm/paid";_pp.siteId="2508";
+_pp.siteUId="ea1e33a9-826b-46a8-b2ee-42219d1a3cea";_pp.orderValue="undefined";_pp.orderId="undefined";(function(){var ppjs=document.createElement("script");ppjs.type="text/javascript";ppjs.async=true;ppjs.src=("https:"==document.location.protocol?"https:":"http:")+"//cdn.pbbl.co/r/"+_pp.siteId+".js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ppjs,s)})();</script><div class="annotator-notice"></div><script type="text/javascript" async="" src="Chapter05_Domain_5_Define_Operationally_Excellent_Architectures_files/generic1575498018713.js" charset="UTF-8"></script><div class="font-flyout" style="top: 201.031px; left: 1280px;"><div class="font-controls-panel">
+	<div class="nightmodes">
+		<ul>
+			<li class="day"><a href="#" id="day-mode" title="Day Mode">
+				<i class="fa fa-sun-o"></i>
+				<span>Day Mode</span></a></li>
+			<li class="cloudy"><a href="#" id="cloudy-mode" title="Cloudy Mode">
+				<i class="fa fa-cloud"></i>
+				<span>Cloud Mode</span>
+			</a></li>
+			<li class="night"><a href="#" id="night-mode" title="Night Mode">
+				<i class="fa fa-moon-o"></i>
+				<span>Night Mode</span>
+			</a></li>
+		</ul>
+	</div>
+
+	<div class="font-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-font left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-font-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-font right"></i>
+		</div>
+	</div>
+
+	<div class="column-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-compress left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-column-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-expand right"></i>
+		</div>
+	</div>
+
+	<a id="reset" class="button" href="#">Reset</a>
+</div>
+</div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.8199979764699815"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.08838313581766866" alt="" src="Chapter05_Domain_5_Define_Operationally_Excellent_Architectures_files/0.txt" width="0" height="0"></div><div style="display: none; visibility: hidden;"><script>(function(){if(null!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')&&void 0!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')){var a=!1;window.addEventListener("blur",function(){a&&dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"facebook",eventVal:0,nonInteraction:0})});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseover",function(){window.focus();
+a=!0});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseout",function(){a=!1})}try{window.twttr=function(b,a,d){var c,e=b.getElementsByTagName(a)[0];if(!b.getElementById(d))return b=b.createElement(a),b.id=d,b.src="//platform.twitter.com/widgets.js",e.parentNode.insertBefore(b,e),window.twttr||(c={_e:[],ready:function(a){c._e.push(a)}})}(document,"script","twitter-wjs"),twttr.ready(function(a){a.events.bind("tweet",trackTwitter)})}catch(b){}})();
+null!==document.querySelector(".IN-widget")&&void 0!==document.querySelector(".IN-widget")&&document.querySelector(".IN-widget").addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"linkedin",eventVal:0,nonInteraction:0})});
+function trackTwitter(a){a&&(a.target&&"IFRAME"==a.target.nodeName&&(opt_target=extractParamFromUri(a.target.src,"url")),dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"twitter",eventVal:0,nonInteraction:0}))}function extractParamFromUri(a,b){if(a){var c=new RegExp("[\\?\x26#]"+b+"\x3d([^\x26#]*)");c=c.exec(a);if(null!=c)return unescape(c[1])}};</script></div><script type="text/javascript" id="">function forceInputUppercase(a){var b=a.target.selectionStart,c=a.target.selectionEnd;a.target.value=a.target.value.toUpperCase();a.target.setSelectionRange(b,c)}void 0!=document.getElementById("id_promotion")&&null!=document.getElementById("id_promotion")&&document.getElementById("id_promotion").addEventListener("keyup",forceInputUppercase,!1);
+void 0!=document.getElementsByName("promotionCode")[0]&&null!=document.getElementsByName("promotionCode")[0]&&document.getElementsByName("promotionCode")[0].addEventListener("keyup",forceInputUppercase,!1);</script><script type="text/javascript" id="">var nonwExpandable=document.querySelectorAll(".orm-ff-NavigationSubnav-headerListItem a, .orm-ff-NavigationView-headerListItem a");nonwExpandable.forEach(function(a,b){b+1!=nonwExpandable.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):b+1==nonwExpandable.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var nonwExpandableFo=document.querySelectorAll(".drop-content li:not(.flyout-parent) a");
+nonwExpandableFo.forEach(function(a,b){"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1!=nonwExpandableFo.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1==nonwExpandableFo.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var expandable=document.querySelectorAll(".orm-ff-NavigationSubnav-toggleControls a, .orm-ff-NavigationView-toggleControls a");expandable.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.parentNode.parentNode.parentNode.querySelectorAll(".orm-Button-btnContentWrap span")[0].childNodes[1].textContent+" | "+a.textContent})})});var flyoutLinks=document.querySelectorAll(".flyout a");
+flyoutLinks.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.closest("li.flyout-parent").getElementsByTagName("a")[0].textContent+" | "+a.textContent})})});</script><span><div id="KampyleAnimationContainer" style="z-index: 2147483000; border: 0px none; position: fixed; display: block; width: 0px; height: 0px;"></div></span><iframe scrolling="no" allowtransparency="true" src="Chapter05_Domain_5_Define_Operationally_Excellent_Architectures_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe></body></html>

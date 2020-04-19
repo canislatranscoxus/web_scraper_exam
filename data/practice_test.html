@@ -1,0 +1,1096 @@
+<!--[if IE]><![endif]-->
+<!DOCTYPE html>
+
+<header>
+<h1><a id="start"></a><span epub:type="pagebreak" role="doc-pagebreak" id="Page_165"></span><span class="chapterNumber">Chapter 6</span><br><span class="chapterTitle">Practice Test</span></h1>
+</header>
+<section id="cpra-sec-0001">
+<section class="exercises">
+<section class="questionSet">
+<ol class="questionList">
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_166"></span>You
+ are responsible for optimizing performance of a movie streaming 
+website. Currently, you are working on the search functionality and have
+ discovered that anytime the library database of titles is searched, the
+ load on the database is reaching peak levels. Your current architecture
+ consists of a PostgreSQL database on an extra-large instance. How would
+ you update your architecture to better handle the load? (Choose two.)</p>
+<ol id="cpra-list-0001" type="a">
+<li>Re-create the database instance on a larger instance using EBS volumes with provisioned IOPS as the volume type.</li>
+<li>Add an RDS Multi-AZ setup to increase the read performance of the media library database.</li>
+<li>Add an ElastiCache store to cache data because searches will often return common data over multiple reads.</li>
+<li>Shard the database into multiple copies installed on multiple instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are engines used by ElastiCache?</p>
+<ol id="cpra-list-0002" type="a">
+<li>reddit, memcached</li>
+<li>redis, memcached</li>
+<li>Sharding, redis</li>
+<li>memcached, Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are AWS-supported solutions for encrypting 
+data at rest when that data is objects stored in S3 buckets? (Choose 
+two.)</p>
+<ol id="cpra-list-0003" type="a">
+<li>ElastiCache for memcached</li>
+<li>AWS Key Management Service</li>
+<li>Customer-provided keys</li>
+<li>AWS Encryptic</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been brought into a new organization with over 20 different 
+AWS accounts. You are tasked with improving the cost management of the 
+organization and want to recommend the use of AWS Organizations and the 
+consolidated billing feature. Which of the following are advantages of 
+consolidated billing that you could use to support your case? (Choose 
+two.)</p>
+<ol id="cpra-list-0004" type="a">
+<li>Multiple accounts can be combined and, through that combination, 
+receive discounts that may reduce the total cost of all the accounts.</li>
+<li>Traffic between accounts will not be subject to data transfer charges if those accounts are all in AWS Organizations.</li>
+<li>All accounts in AWS Organizations will receive a 5% billing reduction in consolidated billing.</li>
+<li>All accounts can be tracked individually and through a single tool.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_167"></span>You
+ are tasked with improving security at an organization that has recently
+ begun using the cloud. It has five developers, a financial manager, and
+ two support engineers. Currently, all eight staff are using the AWS 
+root user for their account. What changes would you make to improve 
+security? (Choose two.)</p>
+<ol id="cpra-list-0005" type="a">
+<li>Get all the users to download the AWS CLI and change the root password.</li>
+<li>Create a new IAM user for each of the eight staff members and provide credentials to each user.</li>
+<li>Put the five developers in the Power Users group, the financial 
+manager in the Billing group, and the support engineers in the Support 
+User group.</li>
+<li>Create a new group with access to the IAM service and ensure that at least one developer is in that group.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need to support a cluster of instances that will host a 
+high-volume, high-load Oracle database installation. You cannot use RDS 
+because of a custom plug-in that the database instances require. Which 
+EBS volume type should you choose for the instances?</p>
+<ol id="cpra-list-0006" type="a">
+<li>Cold HDD</li>
+<li>Throughput Optimized HDD</li>
+<li>General Purpose SSD</li>
+<li>Provisioned IOPS SSD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are responsible for a large AWS environment, and specifically, 
+several subnets within a custom VPC. The VPC contains both public and 
+private subnets. There are approximately 300 EC2 instances within one of
+ the private subnets that uses a NAT device to reach the Internet. Each 
+evening at 11 p.m., the instances push the day’s date to an external 
+data store outside of AWS, available via an API that is Internet 
+accessible. However, you are seeing that not all of the data is getting 
+out each evening, and several of the instances show failed transmissions
+ to the external API. Assuming the API itself is not an issue, what 
+should you consider when attempting to fix this issue? (Choose two.)</p>
+<ol id="cpra-list-0007" type="a">
+<li>The instances are saturating the VPC’s internet gateway. Consider attaching an additional internet gateway to the VPC.</li>
+<li>The NAT device could be a NAT instance that is on an instance size 
+too small to handle the traffic. Reprovision the NAT instance on a 
+larger instance size with more CPU.</li>
+<li>Set up an SQS queue with all the desired transmissions as entries in
+ the queue. Have the EC2 instances poll the queue and transmit data 
+until the queue is completely empty. Add a Lambda job to detect failed 
+transmissions and re-add the failed operation to the SQS queue.</li>
+<li>The instances cannot support the required throughput. Re-provision 
+the instances to use EBS volumes with provisioned IOPS as the volume 
+type.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_168"></span>Which of the following will AWS not allow with regard to EBS? (Choose two.)</p>
+<ol id="cpra-list-0008" type="a">
+<li>Encrypt an existing EBS volume.</li>
+<li>Create an unencrypted copy of an encrypted snapshot.</li>
+<li>Attach an encrypted volume to an EC2 instance.</li>
+<li>Create an encrypted copy of an unencrypted snapshot.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the URL at which an S3 bucket called photoData in the EU West
+ 2 region is accessible for reading and writing, assuming permissions 
+are correctly configured?</p>
+<ol id="cpra-list-0009" type="a">
+<li><span class="codeLabel"><a href="https://photodata.s3-eu-west-2.amazonaws.com/">https://photoData.s3-eu-west-2.amazonaws.com</a></span></li>
+<li><span class="codeLabel"><a href="https://s3.eu-west-2.amazonaws.com/photoData">https://s3.eu-west-2.amazonaws.com/photoData</a></span></li>
+<li><span class="codeLabel"><a href="https://s3-eu-west-2.amazonaws.com/photoData">https://s3-eu-west-2.amazonaws.com/photoData</a></span></li>
+<li><span class="codeLabel"><a href="https://photodata.s3.eu-west-2.amazonaws.com/">https://photoData.s3.eu-west-2.amazonaws.com</a></span></li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are handling a logging update to a fleet of EC2 instances. You 
+have set up a VPC flow log on the group of instances and now want to 
+monitor these logs for a specific set of events, in particular security 
+breaches. To where should the logs be forwarded?</p>
+<ol id="cpra-list-0010" type="a">
+<li>RDS</li>
+<li>S3</li>
+<li>CloudWatch</li>
+<li>RedShift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to provide task- and event-level tracking in a complex 
+application. You’ve been asked to then attach custom code to these tasks
+ and events. However, you are working on an MVP that needs to quickly go
+ to market. Which AWS services would provide you with the most 
+out-of-the-box functionality and require the least amount of 
+infrastructure coding?</p>
+<ol id="cpra-list-0011" type="a">
+<li>SQS, Lambda</li>
+<li>SWF, CloudWatch</li>
+<li>SWF, Lambda</li>
+<li>Elastic Beanstalk, CloudWatch</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are troubleshooting a custom VPC with two subnets. One subnet 
+contains database instances and is not Internet accessible. The other 
+subnet has EC2 instances running web servers. The instances have elastic
+ network interfaces assigned with public IP addresses. However, you are 
+unable to access these instances from the Internet, and they cannot 
+access Internet resources either. What might be causing these problems? 
+(Choose two.)</p>
+<ol id="cpra-list-0012" type="a">
+<li>The instances need to use public IP addresses, but not elastic network interfaces. Remove the elastic network interfaces.</li>
+<li>The VPC needs an internet gateway. Attach an internet gateway and 
+update the VPC’s routing tables to route Internet traffic from the 
+instances through the internet gateway.</li>
+<li>The instances are being prevented from accessing the Internet by the
+ default security group they have been assigned. Add permissions to 
+allow outgoing Internet traffic to the group.</li>
+<li>Update the NACL for the subnet with the EC2 instances to allow 
+inbound HTTP and HTTPS traffic to the EC2 instances in the public 
+subnet.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_169"></span>What
+ common step that is often omitted in setting up a NAT instance can 
+cause a failure in routing traffic from an EC2 instance through the NAT 
+instance and out to the Internet?</p>
+<ol id="cpra-list-0013" type="a">
+<li>Adding a rule to the security group for the NAT instance that allows traffic out to the Internet</li>
+<li>Setting the NAT instance up to use an EBS volume with provisioned IOPS</li>
+<li>Setting the NACL on the subnet with the EC2 instances to allow in traffic from the Internet</li>
+<li>Ensuring that the Source/Destination Check option is disabled on the NAT instance</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of these S3 storage classes is the most durable?</p>
+<ol id="cpra-list-0014" type="a">
+<li>S3</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>All of these classes are equally durable.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been tasked with setting up storage for an application that 
+loads large photos from an existing RDS. These photos are then processed
+ by a Lambda function and have metadata added, along with additional 
+filters. The Lambda code is inexpensive and can easily be rerun if 
+needed. You need to decide on where to store the photos once they have 
+been processed. Each photo will likely be accessed between 1 and 5 times
+ over the course of a month and should be quickly accessible. The chief 
+driver for the application and your decision should be cost and user 
+experience. What S3 storage class would you select?</p>
+<ol id="cpra-list-0015" type="a">
+<li>S3</li>
+<li>S3 IA</li>
+<li>S3 One Zone-IA</li>
+<li>Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a growing fleet of EC2 instances that have been using EBS 
+volumes for data storage. Each instance needs access to all other 
+instances’ data, and your custom replication scripts are growing 
+increasingly taxed and complex. What would you recommend to replace the 
+current usage of EBS volumes and replication?</p>
+<ol id="cpra-list-0016" type="a">
+<li>EBS</li>
+<li>DynamoDB</li>
+<li>EFS</li>
+<li>Service Catalog</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are responsible for setting up the architecture for a new 
+web-based online dating site. You need to create a public subnet in a 
+custom VPC and already have a subnet in the VPC with EC2 instances 
+within it. What other steps would you need to take to make the subnet 
+public? (Choose two.)</p>
+<ol id="cpra-list-0017" type="a">
+<li>Attach a customer gateway to the VPC.</li>
+<li>Make the subnet public using the AWS CLI and the subnet command.</li>
+<li>Attach an internet gateway to the VPC.</li>
+<li>Add a route for the instances in the subnet to the Internet through the attached gateway.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_170"></span>Which of the following are valid S3 request headers? (Choose two.)</p>
+<ol id="cpra-list-0018" type="a">
+<li>x-amz-date</li>
+<li>Content-Length</li>
+<li>x-aws-date</li>
+<li>Content-Size</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are support levels offered by AWS? (Choose two.)</p>
+<ol id="cpra-list-0019" type="a">
+<li>Developer</li>
+<li>Professional</li>
+<li>Business</li>
+<li>Corporate</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following database options are available through RDS? (Choose two.)</p>
+<ol id="cpra-list-0020" type="a">
+<li>DynamoDB</li>
+<li>Aurora</li>
+<li>DB2</li>
+<li>MariaDB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have an Auto Scaling group that has a number of instances spread 
+over several availability zones. Currently, there are 10 instances 
+running, and the Auto Scaling group has rules that allow it to grow to 
+as many as 20 instances and shrink to as few as 3. You have been told by
+ another architect that the group needs to scale in. When this scaling 
+in completes, how many instances might still be running?</p>
+<ol id="cpra-list-0021" type="a">
+<li>10</li>
+<li>5</li>
+<li>15</li>
+<li>20</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are options for writing a CloudFormation template? (Choose two.)</p>
+<ol id="cpra-list-0022" type="a">
+<li>XML</li>
+<li>YAML</li>
+<li>MML</li>
+<li>JSON</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are responsible for building out an application that serves user 
+bases in California, USA; in Tokyo, Japan; and in Sydney, Australia. The
+ application is hosted in regions close to all three major user bases. 
+You want to ensure that users receive localized content in their own 
+area. Which of the following routing policies should you consider for 
+this application in Route 53?</p>
+<ol id="cpra-list-0023" type="a">
+<li>Failover routing</li>
+<li>Latency-based routing</li>
+<li>Geolocation routing</li>
+<li>Weighted routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_171"></span>You
+ have four EC2 instances serving web content with an ELB in front of the
+ instances. You are configuring Route 53 and want to ensure that the ELB
+ is directing traffic. What sort of record should you create in Route 
+53?</p>
+<ol id="cpra-list-0024" type="a">
+<li>A record</li>
+<li>MX record</li>
+<li>CNAME record</li>
+<li>AAAA record</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are the architect for a large migration from on-premises data 
+stores to DynamoDB. As part of this migration, you need to manage the 
+access and authorization for users, but the organization wants all 
+existing users to maintain their Active Directory usernames. What steps 
+will you need to do in order to facilitate this move? (Choose two.)</p>
+<ol id="cpra-list-0025" type="a">
+<li>Select an identity provider.</li>
+<li>Create a new IAM user for each user of the data.</li>
+<li>Use the AWS security token service to create temporary tokens.</li>
+<li>Create a service control policy in AWS Organizations for the imported data.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are working on increasing performance for an application that 
+routinely sees traffic spikes between 6 and 8 p.m. Eastern time every 
+evening. At that time, even with Auto Scaling policies, load increases 
+so quickly that response times slow to a crawl. Without knowing anything
+ more than this about what the traffic surge represents, how could you 
+most easily and efficiently ensure that your application can respond to 
+these surges?</p>
+<ol id="cpra-list-0026" type="a">
+<li>Set up a lower threshold for scaling in your Auto Scaling group; consider 50% as a starting point.</li>
+<li>Log on each evening at 7:30 p.m. and manually scale the application up.</li>
+<li>Set up CloudWatch monitors on the application. Write a Lambda 
+function that will trigger scaling up. Attach the Lambda function to the
+ CloudWatch monitors and set a trigger threshold.</li>
+<li>Set up scheduled scaling so that the application scales up at 7:45 p.m. each evening and scales back down at 8:30 p.m.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to improve the performance of an existing DynamoDB database.
+ Currently, you believe that CPU utilization is the biggest concern, 
+although you are attempting to proactively provision additional 
+resources rather than reacting to an existing load problem. Which of the
+ following might be your approach?</p>
+<ol id="cpra-list-0027" type="a">
+<li>Stop the database and re-provision it using provisioned IOPS SSD EBS volumes.</li>
+<li>Set up read replicas to improve read performance.</li>
+<li>Configure DynamoDB to use a Multi-AZ setup.</li>
+<li>None of these. DynamoDB scales automatically, and you cannot manage its resources at this level.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_172"></span>You
+ have been brought in to reduce costs on a production application. You 
+find that currently, CloudWatch has been configured using the detailed 
+option, and is collecting metrics every minute. You suggest updating 
+CloudWatch to use default settings. Your customer likes the idea of 
+reducing monitoring costs but wants to know how often metrics would be 
+collected in your recommendation. What do you tell the customer?</p>
+<ol id="cpra-list-0028" type="a">
+<li>CloudWatch collects metrics every 2 minutes using default settings.</li>
+<li>CloudWatch collects metrics every 5 minutes using default settings.</li>
+<li>CloudWatch collects metrics every 10 minutes using default settings.</li>
+<li>The default settings for CloudWatch do not specify an interval at which metrics are collected.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are newly responsible for a data-driven system that performs 
+search and discovery of a very large database. The database is an RDS 
+MySQL installation currently showing 82% CPU utilization. You are 
+concerned about performance; what steps would you recommend? (Choose 
+two.)</p>
+<ol id="cpra-list-0029" type="a">
+<li>Set up RDS to use Multi-AZ and ensure that the regions chosen are geographically close to your user base.</li>
+<li>Set up read replicas of your RDS database.</li>
+<li>Add an ElastiCache instance in front of your database.</li>
+<li>Create three copies of your database and move them into regions that are geographically distributed.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have been brought in to add bits of custom code attached to a 
+number of events on an existing application. The application needs to be
+ updated quickly, and you want to minimize the code you need to write. 
+What AWS solution will offer you the ability to accomplish these goals 
+most quickly?</p>
+<ol id="cpra-list-0030" type="a">
+<li>SWF</li>
+<li>SQS</li>
+<li>Kinesis</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are investigating an application that uses an SQS queue. Messages
+ are making it to the queue, but those messages are not being processed 
+in the order in which they were received by the queue. You want to 
+ensure that ordering is preserved; what should you do?</p>
+<ol id="cpra-list-0031" type="a">
+<li>Update the queue to use standard delivery so delivery always happens at least once.</li>
+<li>Change the queue to be a FIFO queue, which will ensure that ordering is preserved.</li>
+<li>Update the queue to use the “deliver in order” option via the AWS CLI.</li>
+<li>Change the queue to be a LIFO queue, which will ensure that ordering is preserved.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a valid routing policy for Route 53?</p>
+<ol id="cpra-list-0032" type="a">
+<li>Simple routing policy</li>
+<li>Failover routing policy</li>
+<li>Load-balancing routing policy</li>
+<li>Latency-based routing policy</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_173"></span>You
+ are responsible for a cluster of EC2 instances that service a 
+user-facing media-rich application, all behind an elastic load balancer.
+ The application has begun to receive spikes of activity at 
+unpredictable times, and your instances are flooded with requests and 
+become nonresponsive in many cases. How would you rearchitect this 
+application to address these issues?</p>
+<ol id="cpra-list-0033" type="a">
+<li>Move your application instances to use the spot market to account for the spikes in usage.</li>
+<li>Increase the size of the EC2 instances and choose instances with higher CPU ratings.</li>
+<li>Ask AWS to pre-warm the elastic load balancer so that it will respond more quickly to spikes in traffic.</li>
+<li>Add another application component, such as an SQS queue, and have 
+requests go to the queue. Then have the instances process requests from 
+the queue rather than directly from user requests.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a long-running batch process that you want to move to use 
+spot instances in order to reduce costs. Which of the following should 
+you consider when evaluating if these batch processes will function 
+effectively on the spot market? (Choose two.)</p>
+<ol id="cpra-list-0034" type="a">
+<li>The process must be able to stop and restart without failing or losing data.</li>
+<li>The process must be able to run at any time.</li>
+<li>The process must not trigger more than 100 API requests within any single minute of running.</li>
+<li>The process must not use an AWS services outside of S3 or RDS.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are the architect for a new application that needs durable 
+storage in the cloud. You have been asked to select an S3 storage class 
+with the maximum available durability. Which option provides S3 storage 
+classes with maximum durability?</p>
+<ol id="cpra-list-0035" type="a">
+<li>S3 standard</li>
+<li>S3 standard, S3-IA</li>
+<li>S3 standard, S3-IA, S3 One Zone-IA</li>
+<li>S3 standard, S3-IA, S3 One Zone-IA, Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What differences exist between storing data from an instance on an 
+attached root EBS volume versus storing that data in S3? (Choose two.)</p>
+<ol id="cpra-list-0036" type="a">
+<li>EBS uses block-level storage, while S3 uses object-level storage.</li>
+<li>EBS uses object-level storage, while S3 uses block-level storage.</li>
+<li>EBS volumes are ephemeral by default, while S3 storage is not.</li>
+<li>S3 storage is ephemeral by default, while EBS storage is not.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_174"></span>You
+ have been put in charge of a set of RDS databases that are not 
+performing at speeds required by the application cluster using those 
+databases. You have been tasked with increasing the performance of the 
+databases while keeping costs as low as possible. The current RDS 
+installation uses MySQL. What recommendation would you make?</p>
+<ol id="cpra-list-0037" type="a">
+<li>Move from RDS to EC2 instances with databases installed on the 
+instances. Right-size the instances and custom database installation for
+ the application’s needs.</li>
+<li>Move from MySQL to Aurora within RDS, as Aurora consistently shows better performance than MySQL.</li>
+<li>Move from MySQL to Oracle within RDS and add the required Oracle licenses to increase the overall RDS cluster size.</li>
+<li>Stop the RDS cluster and then resize all instances. Restart the cluster, keeping the MySQL databases intact.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following AWS services are components of a high-availability, fault-tolerant solution? (Choose two.)</p>
+<ol id="cpra-list-0038" type="a">
+<li>Lightsail</li>
+<li>AWS Organizations</li>
+<li>ELB</li>
+<li>DynamoDB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following AWS managed services are not automatically 
+redundant and require configuration on your part to be highly available?
+ (Choose two.)</p>
+<ol id="cpra-list-0039" type="a">
+<li>EC2</li>
+<li>S3</li>
+<li>SQS</li>
+<li>RDS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>As a new architect on a large project, you have begun to run 
+vulnerability scans on all public-facing API endpoints of your 
+application. However, these scans are failing, and you have received a 
+number of misuse warnings from AWS. What is the problem?</p>
+<ol id="cpra-list-0040" type="a">
+<li>AWS does not allow vulnerability scans on its instances.</li>
+<li>AWS allows vulnerability scans, but they must be run using AWS’s own services and tools.</li>
+<li>AWS allows vulnerability scans, but they must be run from AWS instances.</li>
+<li>AWS allows vulnerability scans, but they must be run with advance notice to and permission from AWS.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_175"></span>You
+ have recently taken on architecture at a large genomics nonprofit. 
+Currently, the organization imports hundreds of terabytes (TB) daily and
+ then needs to run complex queries against that data. The queries can 
+take several hours, and at times even days, to complete. They write 
+their state to S3 frequently so the queries can recover from failure 
+without restarting. The organization wants to minimize costs associated 
+with this processing. What technologies and recommendations might you 
+suggest? (Choose two.)</p>
+<ol id="cpra-list-0041" type="a">
+<li>Create an SQS instance and queue up references to all the data that 
+needs to be queried as it comes in. Ensure that the queue is readable 
+via EC2 instances.</li>
+<li>Create a new IAM role that allows EC2 instances to write data to S3 stores.</li>
+<li>Set up a placement group with EC2 instances that can read from the SQS queue and run the queries against referenced data.</li>
+<li>Set up EC2 spot instances that can read from the SQS queue and S3 and run the queries on those instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have an application that consists of worker nodes that are 
+on-demand instances and processing nodes that are a mixture of on-demand
+ instances and spot instances. Your application collects information and
+ does initial processing as it comes in from users using the worker 
+nodes. Then, the processing nodes perform analytics each evening. Your 
+goal is to use spot instances for most of this processing and only 
+overflow to the on-demand instances in times of high load. However, the 
+spot instances have been terminating more often lately, causing more 
+usage of the on-demand instances. What might you do to increase the 
+usage of the spot instances?</p>
+<ol id="cpra-list-0042" type="a">
+<li>Convert the on-demand processing instances to spot instances so more spot instances will be available.</li>
+<li>Convert the worker node instances to spot instances so more spot instances will be available.</li>
+<li>Lower the bid price on the spot instances to ensure only lower-priced instances are used.</li>
+<li>Raise the bid price on the spot instances so that they will run longer before termination occurs.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are assisting a company with moving its large data estate to the 
+cloud and reducing its on-site storage costs. The company has serious 
+concerns about performance of the cloud as it relates to accessing its 
+data. What storage gateway setup would you suggest to ensure that the 
+company’s frequently accessed files do not suffer latency?</p>
+<ol id="cpra-list-0043" type="a">
+<li>File gateway</li>
+<li>Cached volume gateway</li>
+<li>Tape gateway</li>
+<li>Stored volume gateway</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_176"></span>Which of the following take the place of a traditional firewall appliance in AWS?</p>
+<ol id="cpra-list-0044" type="a">
+<li>NACLs, IAM, WAF</li>
+<li>Security groups, IAM, WAF</li>
+<li>NACLs, security groups</li>
+<li>Security groups, VPCs, VPGs</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are created automatically as part of the default VPC that AWS sets up for all AWS accounts? (Choose two.)</p>
+<ol id="cpra-list-0045" type="a">
+<li>Internet gateway</li>
+<li>Virtual private gateway</li>
+<li>Public subnet</li>
+<li>NAT gateway</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Rank the factors considered in terminating an instance that is part 
+of an Auto Scaling group, from highest priority to lowest priority.</p>
+<ol id="cpra-list-0046" type="a">
+<li>Age of launch configuration, availability zone with the most instances, nearness to next billing hour</li>
+<li>Availability zone with the most instances, age of launch configuration, nearness to next billing hour</li>
+<li>Age of launch configuration, nearness to next billing hour, availability zone with the most instances</li>
+<li>Availability zone with the most instances, nearness to next billing hour, age of launch configuration</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>AWS supports two types of virtualization: paravirtual and hardware 
+virtual machines. Why might you choose one type of virtualization over 
+the other?</p>
+<ol id="cpra-list-0047" type="a">
+<li>Paravirtualization allows the use of hardware extensions like 
+enhanced networking and GPU processing, but hardware virtualization does
+ not.</li>
+<li>Hardware virtualization allows the use of hardware extensions like 
+enhanced networking and GPU processing, but paravirtualization does not.</li>
+<li>Hardware virtualization only works with certain instance types, while paravirtualization works with all instance types.</li>
+<li>Both paravirtualization and hardware virtualization function exactly
+ the same way; neither is a better performance choice than the other.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which EBS volume type is most suited for workloads that perform OLTP and need to perform extremely well and consistently?</p>
+<ol id="cpra-list-0048" type="a">
+<li>Provisioned IOPS volumes</li>
+<li>General SSH volumes</li>
+<li>Magnetic storage</li>
+<li>Throughput Optimized HDD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_177"></span>After
+ discovering that HTTPS was not allowed to reach instances via a 
+security group, you have added a rule to allow in HTTPS. How long will 
+it take for your changes to take effect on the affected instances?</p>
+<ol id="cpra-list-0049" type="a">
+<li>Immediately</li>
+<li>Approximately 30 seconds</li>
+<li>Approximately 1 minute</li>
+<li>Immediately for the instances, but longer if you have an ELB in front of the instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have discovered that your production database instance is peaking
+ and reaching 90% CPU usage when a set of nightly scripts are run 
+against the database. The scripts perform complex queries and gather 
+reporting data to be distributed via email reports the next day. As a 
+result of the load, the database is performing poorly, and the queries 
+are beginning to take into the following work day to complete. Which 
+option would you recommend to reduce this peak usage in the evenings?</p>
+<ol id="cpra-list-0050" type="a">
+<li>Increase the memory attached to the database instance.</li>
+<li>Set up a second database instance as a Multi-AZ database and run your queries against the Multi-AZ database.</li>
+<li>Set up read replicas of the database instance and run your queries against the read replicas.</li>
+<li>Set up an ElastiCache instance in front of the database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Who can delete objects in an S3 bucket with versioning enabled?</p>
+<ol id="cpra-list-0051" type="a">
+<li>Anyone with IAM permissions to modify the bucket</li>
+<li>Anyone with IAM permissions to delete objects in the bucket</li>
+<li>Only the bucket owner</li>
+<li>Once versioning is enabled, no object can ever be completely removed.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your customer has instructed you to encrypt all objects at rest in 
+your application. The customer is frequently audited and must prove 
+compliance with a selective set of government policies. Which encryption
+ approach would you recommend?</p>
+<ol id="cpra-list-0052" type="a">
+<li>SSE-C</li>
+<li>SSE-KMS</li>
+<li>SSE-S3</li>
+<li>Client-provided encryption keys</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_178"></span>You
+ have set up three read replicas of your primary database instance. You 
+have noticed that reads of the replicas do not always return consistent 
+results, especially after large writes to the primary database instance.
+ What might the problem be?</p>
+<ol id="cpra-list-0053" type="a">
+<li>This is normal; replication from a primary instance to read replicas always takes between 30 and 60 seconds.</li>
+<li>This is normal; replication from a primary instance to read replicas
+ is asynchronous and, although sometimes nearly instant, may also at 
+times take longer to complete.</li>
+<li>You need to switch the replication model on your read replicas from asynchronous to synchronous to ensure read consistency.</li>
+<li>You need to investigate network latency between your primary and 
+read replicas and consider moving the replicas into the same 
+availability zone as the primary instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>By default, how many S3 buckets can you create for a single AWS account?</p>
+<ol id="cpra-list-0054" type="a">
+<li>20</li>
+<li>50</li>
+<li>100</li>
+<li>There is no default limit.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to create a public subnet in a custom VPC. Which of the following do you <i>not</i> need to accomplish this?</p>
+<ol id="cpra-list-0055" type="a">
+<li>An internet gateway</li>
+<li>An elastic IP address</li>
+<li>A routing table with a route to an internet gateway</li>
+<li>You need all of these for a public subnet.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the largest allowed volume size for provisioned IOPS EBS volumes?</p>
+<ol id="cpra-list-0056" type="a">
+<li>4TiB</li>
+<li>12TiB</li>
+<li>16TiB</li>
+<li>32TiB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements regarding EBS volumes and EC2 instances is not true?</p>
+<ol id="cpra-list-0057" type="a">
+<li>You can attach multiple EC2 instances to a single EBS volume at one time.</li>
+<li>You can attach multiple EBS volumes to a single EC2 instance at one time.</li>
+<li>You can attach multiple EC2 instances to a single EBS volume, but not all at the same time.</li>
+<li>Non-root EBS volumes are not deleted when an attached instance is terminated by default.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_179"></span>Which of the following AWS services does not store data in key-value pairs?</p>
+<ol id="cpra-list-0058" type="a">
+<li>S3</li>
+<li>DynamoDB</li>
+<li>IAM programmatic credentials</li>
+<li>RDS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are auditing the EBS volumes of a number of EC2 instances running
+ three web-facing data-intensive applications. You notice that a number 
+of the volumes are configured as throughput optimized HDDs rather than 
+General Purpose SSD or Provisioned IOPS SSD. Why might this decision be 
+appropriate? (Choose two.)</p>
+<ol id="cpra-list-0059" type="a">
+<li>Lowered costs is a primary consideration.</li>
+<li>Data throughput is a primary consideration.</li>
+<li>The applications primarily use large performance-critical workloads.</li>
+<li>The throughput optimized HDDs serve only a test environment rather than a production one.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following databases is not supported by RDS?</p>
+<ol id="cpra-list-0060" type="a">
+<li>MariaDB</li>
+<li>SQL Server</li>
+<li>Aurora</li>
+<li>InnoDB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements are true about the default subnet created with a standard AWS account? (Choose two.)</p>
+<ol id="cpra-list-0061" type="a">
+<li>The instances created within it will be public by default.</li>
+<li>The instances created within it will have public elastic IPs by default.</li>
+<li>The instances created within it will have routes to the Internet through an internet gateway by default.</li>
+<li>The VPC within which the subnet is created will have an attached virtual private gateway as well as an internet gateway.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following types of traffic are supported by classic load balancers? (Choose two.)</p>
+<ol id="cpra-list-0062" type="a">
+<li>HTTPS</li>
+<li>SSH</li>
+<li>FTP</li>
+<li>HTTP</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which S3 storage class has the same durability as it does availability?</p>
+<ol id="cpra-list-0063" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>S3-RRS</li>
+<li>S3 One Zone-IA</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_180"></span>You
+ want to ensure that no object in S3 is ever accidentally deleted, as 
+well as preserve audit trails for deleted files. What options would you 
+consider? (Choose two.)</p>
+<ol id="cpra-list-0064" type="a">
+<li>SSE-KMS</li>
+<li>MFA Delete</li>
+<li>Versioning</li>
+<li>Detailed monitoring with CloudWatch</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a fleet of EC2 instances serving web content. The instances 
+typically run between 75% and 90% of capacity, and your projections show
+ consistent usage over the next 36 months. What would you recommend to 
+potentially reduce the costs of running these instances?</p>
+<ol id="cpra-list-0065" type="a">
+<li>Spot instances</li>
+<li>Reserved instances</li>
+<li>On-demand instances</li>
+<li>Placement groups</li>
+</ol></div>
+</li></ol>
+</section>
+</section>
+</section>
+</section>
+<div class="annotator-outer annotator-viewer viewer annotator-hide">
+  <ul class="annotator-widget annotator-listing"></ul>
+</div><div class="annotator-modal-wrapper annotator-editor-modal annotator-editor annotator-hide">
+	<div class="annotator-outer editor">
+		<h2 class="title">Highlight</h2>
+		<form class="annotator-widget">
+			<ul class="annotator-listing">
+			<li class="annotator-item"><textarea id="annotator-field-5" placeholder="Add a note using markdown (optional)" class="js-editor" maxlength="750"></textarea></li></ul>
+			<div class="annotator-controls">
+				<a class="link-to-markdown" href="https://daringfireball.net/projects/markdown/basics" target="_blank">?</a>
+				<ul>
+					<li class="delete annotator-hide"><a href="#delete" class="annotator-delete-note button positive">Delete Note</a></li>
+					<li class="save"><a href="#save" class="annotator-save annotator-focus button positive">Save Note</a></li>
+					<li class="cancel"><a href="#cancel" class="annotator-cancel button">Cancel</a></li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div><div class="annotator-modal-wrapper annotator-delete-confirm-modal" style="display: none;">
+  <div class="annotator-outer">
+    <h2 class="title">Highlight</h2>
+      <a class="js-close-delete-confirm annotator-cancel close" href="#close">Close</a>
+      <div class="annotator-widget">
+         <div class="delete-confirm">
+            Are you sure you want to permanently delete this note?
+         </div>
+         <div class="annotator-controls">
+            <a href="#cancel" class="annotator-cancel button js-cancel-delete-confirm">No, I changed my mind</a>
+            <a href="#delete" class="annotator-delete button positive js-delete-confirm">Yes, delete it</a>
+         </div>
+       </div>
+   </div>
+</div><div class="annotator-adder" style="display: none;">
+	<ul class="adders">
+		
+		<li class="copy"><a href="#">Copy</a></li>
+		
+		<li class="add-highlight"><a href="#">Add Highlight</a></li>
+		<li class="add-note"><a href="#">
+			Add Note
+		</a></li>
+		
+	</ul>
+</div></div></div>
+
+
+
+  <div class="t-sbo-prev sbo-prev sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c05.xhtml" class="prev nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-prev-label">Prev</span>
+          <span class="visuallyhidden">Previous Chapter</span>
+          <div class="pagination-title t-prev-title">Chapter 5 Domain 5: Define Operationally Excellent Architectures</div>
+        </a>
+    
+  
+  </div>
+
+  <div class="t-sbo-next sbo-next sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/b01.xhtml" class="next nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-next-label">Next</span>
+          <span class="visuallyhidden">Next Chapter</span>
+          <div class="pagination-title t-next-title">Appendix Answers to Review Questions</div>
+        </a>
+    
+  
+  </div>
+
+</section>
+  </div>
+<section class="sbo-saved-archives"></section>
+
+<script>
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  context = {
+    product: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      type: 'book',
+      identifier: '9781119558439',
+      topic: 'Amazon Web Services (AWS)'
+    },
+    content: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      formatType: 'book',
+      identifier: '9781119558439',
+      author: 'Brett McLaughlin',
+      publisher: decodeHtml('Sybex'),
+      releaseDate: '2019-03-19',
+      parentTopic: 'none',
+      free: 'no',
+      subdirectory: 'none'
+    }
+  }
+  dataLayer.push(context);
+</script>
+
+
+
+          
+          
+  
+
+
+
+
+    
+    
+
+
+
+        
+      </div>
+      
+        
+
+
+<footer class="pagefoot t-pagefoot">
+  <a href="#" class="icon-up" style="display: none;"><div class="visuallyhidden">Back to top</div></a>
+  <ul class="js-footer-nav">
+  
+    
+    <li><a href="https://learning.oreilly.com/u/preferences/">Settings</a></li>
+    
+    <li><a href="https://learning.oreilly.com/public/support/">Support</a></li>
+    
+    <li><a href="https://learning.oreilly.com/accounts/logout/">Sign Out</a></li>
+    
+  
+  
+  </ul>
+  <span class="copyright">© 2019 <a href="https://learning.oreilly.com/" target="_blank">O'Reilly Media, Inc</a>.</span>
+  
+    
+    <a href="https://www.oreilly.com/terms/">Terms of Service</a> 
+     / 
+    
+    <a href="https://learning.oreilly.com/privacy">Privacy Policy</a> 
+    
+    
+  
+</footer>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":2,"licenseKey":"510f1a6865","transactionName":"YgdaZ0NSW0cEB0RdWltNfkZfUEFdCgofXFBHDVYdR1pQQxZeRl1QQj1aWkU=","applicationID":"172641827,79672898,93931619","errorBeacon":"bam.nr-data.net","agent":"","applicationTime":1557}</script>
+
+      
+    
+    <script src="Chapter06_Practice_Test_files/a_005" charset="utf-8"></script>
+    <script src="Chapter06_Practice_Test_files/a_004" charset="utf-8"></script>
+  
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1732687426968531");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1732687426968531&amp;ev=PageView&amp;noscript=1"></noscript><script type="text/javascript" id="">(function(){window.medalliaUserIdentifier=document.documentElement.dataset.userUuid;window.medalliaUserName=document.documentElement.dataset.username})();</script>
+<script type="text/javascript" id="" src="Chapter06_Practice_Test_files/embed.js"></script>
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("set","agent","tmgoogletagmanager","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="">window._pp=window._pp||[];if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/register/")_pp.targetUrl="/confirm/trial";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/subscribe/")_pp.targetUrl="/confirm/paid";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/signup/")_pp.targetUrl="/confirm/paid";_pp.siteId="2508";
+_pp.siteUId="ea1e33a9-826b-46a8-b2ee-42219d1a3cea";_pp.orderValue="undefined";_pp.orderId="undefined";(function(){var ppjs=document.createElement("script");ppjs.type="text/javascript";ppjs.async=true;ppjs.src=("https:"==document.location.protocol?"https:":"http:")+"//cdn.pbbl.co/r/"+_pp.siteId+".js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ppjs,s)})();</script><div class="annotator-notice"></div><script type="text/javascript" async="" src="Chapter06_Practice_Test_files/generic1575498018713.js" charset="UTF-8"></script><div class="font-flyout" style="top: 201.031px; left: 1280px;"><div class="font-controls-panel">
+	<div class="nightmodes">
+		<ul>
+			<li class="day"><a href="#" id="day-mode" title="Day Mode">
+				<i class="fa fa-sun-o"></i>
+				<span>Day Mode</span></a></li>
+			<li class="cloudy"><a href="#" id="cloudy-mode" title="Cloudy Mode">
+				<i class="fa fa-cloud"></i>
+				<span>Cloud Mode</span>
+			</a></li>
+			<li class="night"><a href="#" id="night-mode" title="Night Mode">
+				<i class="fa fa-moon-o"></i>
+				<span>Night Mode</span>
+			</a></li>
+		</ul>
+	</div>
+
+	<div class="font-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-font left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-font-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-font right"></i>
+		</div>
+	</div>
+
+	<div class="column-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-compress left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-column-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-expand right"></i>
+		</div>
+	</div>
+
+	<a id="reset" class="button" href="#">Reset</a>
+</div>
+</div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.8199979764699815"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.08838313581766866" alt="" src="Chapter06_Practice_Test_files/0.txt" width="0" height="0"></div><div style="display: none; visibility: hidden;"><script>(function(){if(null!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')&&void 0!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')){var a=!1;window.addEventListener("blur",function(){a&&dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"facebook",eventVal:0,nonInteraction:0})});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseover",function(){window.focus();
+a=!0});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseout",function(){a=!1})}try{window.twttr=function(b,a,d){var c,e=b.getElementsByTagName(a)[0];if(!b.getElementById(d))return b=b.createElement(a),b.id=d,b.src="//platform.twitter.com/widgets.js",e.parentNode.insertBefore(b,e),window.twttr||(c={_e:[],ready:function(a){c._e.push(a)}})}(document,"script","twitter-wjs"),twttr.ready(function(a){a.events.bind("tweet",trackTwitter)})}catch(b){}})();
+null!==document.querySelector(".IN-widget")&&void 0!==document.querySelector(".IN-widget")&&document.querySelector(".IN-widget").addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"linkedin",eventVal:0,nonInteraction:0})});
+function trackTwitter(a){a&&(a.target&&"IFRAME"==a.target.nodeName&&(opt_target=extractParamFromUri(a.target.src,"url")),dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"twitter",eventVal:0,nonInteraction:0}))}function extractParamFromUri(a,b){if(a){var c=new RegExp("[\\?\x26#]"+b+"\x3d([^\x26#]*)");c=c.exec(a);if(null!=c)return unescape(c[1])}};</script></div><script type="text/javascript" id="">function forceInputUppercase(a){var b=a.target.selectionStart,c=a.target.selectionEnd;a.target.value=a.target.value.toUpperCase();a.target.setSelectionRange(b,c)}void 0!=document.getElementById("id_promotion")&&null!=document.getElementById("id_promotion")&&document.getElementById("id_promotion").addEventListener("keyup",forceInputUppercase,!1);
+void 0!=document.getElementsByName("promotionCode")[0]&&null!=document.getElementsByName("promotionCode")[0]&&document.getElementsByName("promotionCode")[0].addEventListener("keyup",forceInputUppercase,!1);</script><script type="text/javascript" id="">var nonwExpandable=document.querySelectorAll(".orm-ff-NavigationSubnav-headerListItem a, .orm-ff-NavigationView-headerListItem a");nonwExpandable.forEach(function(a,b){b+1!=nonwExpandable.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):b+1==nonwExpandable.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var nonwExpandableFo=document.querySelectorAll(".drop-content li:not(.flyout-parent) a");
+nonwExpandableFo.forEach(function(a,b){"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1!=nonwExpandableFo.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1==nonwExpandableFo.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var expandable=document.querySelectorAll(".orm-ff-NavigationSubnav-toggleControls a, .orm-ff-NavigationView-toggleControls a");expandable.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.parentNode.parentNode.parentNode.querySelectorAll(".orm-Button-btnContentWrap span")[0].childNodes[1].textContent+" | "+a.textContent})})});var flyoutLinks=document.querySelectorAll(".flyout a");
+flyoutLinks.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.closest("li.flyout-parent").getElementsByTagName("a")[0].textContent+" | "+a.textContent})})});</script><span><div id="KampyleAnimationContainer" style="z-index: 2147483000; border: 0px none; position: fixed; display: block; width: 0px; height: 0px;"></div></span><iframe scrolling="no" allowtransparency="true" src="Chapter06_Practice_Test_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe></body></html>

@@ -1,0 +1,2680 @@
+<!--[if IE]><![endif]-->
+<!DOCTYPE html>
+
+
+<body class="reading sidenav nav-collapsed  scalefonts library">
+
+    
+
+
+
+<div id="sbo-rt-content"><div class="annotator-wrapper"><section epub:type="chapter" role="doc-chapter">
+<header>
+<h1><a id="start"></a><span epub:type="pagebreak" role="doc-pagebreak" id="Page_53"></span><span class="chapterNumber">Chapter 2</span><br><span class="chapterTitle">Domain 2: Define Performant Architectures</span></h1>
+</header>
+<section id="c02-sec-0001">
+<ol class="none">
+<li><b>✓ Subdomain: 2.1 Choose performant storage and databases.</b></li>
+<li><b>✓ Subdomain: 2.2 Apply caching to improve performance.</b></li>
+<li><b>✓ Subdomain: 2.3 Design solutions for elasticity and scalability.</b></li>
+</ol>
+<section class="exercises">
+<h2><a id="c02-exsec-0001"></a>Review Questions</h2>
+<section class="questionSet">
+<ol class="questionList">
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_54"></span>When
+ replicating data from a primary RDS instance to a secondary one, how 
+much will you be charged, in relation to the standard data transfer 
+charge?</p>
+<ol id="c02-list-0001" type="a">
+<li>Your data will be transferred at the standard data transfer charge.</li>
+<li>Your data will be transferred at half of the standard data transfer charge.</li>
+<li>Your data will be transferred at half of the standard data transfer 
+charge up to 1 GB of transfer per day and then additional data at the 
+standard data transfer charge.</li>
+<li>There is no charge for primary-to-secondary data replication.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid options for where an RDS read 
+replica is set up in relation to the primary instance? (Choose two.)</p>
+<ol id="c02-list-0002" type="a">
+<li>In the same region as the primary instance</li>
+<li>In a separate region from the primary instance</li>
+<li>In an instance running on premises</li>
+<li>Both A and B</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the primary purpose of a read replica RDS configuration?</p>
+<ol id="c02-list-0003" type="a">
+<li>Disaster recovery</li>
+<li>Fault tolerance</li>
+<li>Performance</li>
+<li>Security</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following databases support read replicas?</p>
+<ol id="c02-list-0004" type="a">
+<li>MariaDB</li>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+<li>All of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following databases support read replicas?</p>
+<ol id="c02-list-0005" type="a">
+<li>Oracle</li>
+<li>MySQL</li>
+<li>DynamoDB</li>
+<li>All of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is true about a read replica? (Choose two.)</p>
+<ol id="c02-list-0006" type="a">
+<li>It is a read-only instance of a primary database.</li>
+<li>It can only exist in the same region as the primary database, although it can be in a different availability zone.</li>
+<li>It is updated via asynchronous replication from the primary instance.</li>
+<li>It is updated via synchronous replication from the primary instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_55"></span>Which of the following is true about an RDS read replica configuration? (Choose two.)</p>
+<ol id="c02-list-0007" type="a">
+<li>Only three read replicas can be set up for a single primary database instance.</li>
+<li>Only MariaDB, MySQL, and Aurora are supported.</li>
+<li>A read replica replicates all databases in the primary instance.</li>
+<li>A read replica can exist in a different region than the primary instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a primary database set up to use read replicas running on an
+ instance in US East 1. You have three read replicas also in US East 1 
+and two additional replicas in US West 2. You are trying to create a new
+ replica in EU West 1 and are getting an error. What do you need to do 
+to resolve this error and successfully create a new read replica in EU 
+West 1?</p>
+<ol id="c02-list-0008" type="a">
+<li>Turn on the Multi-AZ option for your primary instance.</li>
+<li>You can’t create the replica in EU West 1. Instead, create the 
+replica in another US region to avoid regulations about read replicas in
+ the EU.</li>
+<li>Contact AWS about raising the number of read replicas allowed from 5 to 8.</li>
+<li>Turn off one of the read replicas in US East 1 and then you can create the instance in EU West 1.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are true about a read replica setup? (Choose two.)</p>
+<ol id="c02-list-0009" type="a">
+<li>Backups are configured by default when you set up read replicas.</li>
+<li>They provide a highly scalable solution for your on-premises databases.</li>
+<li>They can exist within a single AZ, cross-AZ, or cross-region.</li>
+<li>A read replica can be promoted to a stand-alone database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are true about a read replica setup? (Choose two.)</p>
+<ol id="c02-list-0010" type="a">
+<li>Automated backups are taken from the read replicas rather than the primary instance.</li>
+<li>The database engine on all instances is active.</li>
+<li>Each read replica instance can upgrade its database engine separate from the primary instance.</li>
+<li>Replication is synchronous.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements are false? (Choose two.)</p>
+<ol id="c02-list-0011" type="a">
+<li>Both read replicas and Multi-AZ configurations ensure that you have database instances in multiple availability zones.</li>
+<li>Both read replicas and Multi-AZ configurations provide disaster recovery options for your primary instance.</li>
+<li>A single database can both have a read replica and be part of a Multi-AZ setup.</li>
+<li>A read replica can be promoted to be a stand-alone database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_56"></span>Which of the following statements is true?</p>
+<ol id="c02-list-0012" type="a">
+<li>A Multi-AZ setup is aimed at fault tolerance, while a read replica setup is aimed at scalability.</li>
+<li>Both read replicas and Multi-AZ configurations are aimed at fault tolerance.</li>
+<li>A Multi-AZ setup is aimed at scalability, while a read replica setup is aimed at fault tolerance.</li>
+<li>Both read replicas and Multi-AZ configurations are aimed at scalability.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How do applications communicate with read replica instances?</p>
+<ol id="c02-list-0013" type="a">
+<li>Through the read replica REST API provided by RDS</li>
+<li>ELBs and ALBs will automatically translate requests to a read replica to use the read replica REST API provided by RDS.</li>
+<li>Each read replica provides a read replica key that allows 
+applications to communicate with the instance as if it were a normal 
+database instance.</li>
+<li>Applications communicate with a read replica exactly as they would with a non-read replica.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid reasons to use read replication? (Choose two.)</p>
+<ol id="c02-list-0014" type="a">
+<li>You have a read-heavy database that is peaking in traffic.</li>
+<li>You have a large number of errors reported by applications trying to
+ update user entries in your current database and want to reduce these 
+errors.</li>
+<li>You want an automated disaster recovery solution in case you lose an AZ.</li>
+<li>You have a large number of business reporting queries that are currently interfering with customer application performance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Does a read replica provide any assistance at all in creating a fault-tolerant database setup?</p>
+<ol id="c02-list-0015" type="a">
+<li>Yes, it provides automated backups to the read replicas.</li>
+<li>Yes, if the primary instance fails, one of the replicas can be manually promoted to a stand-alone database instance.</li>
+<li>Yes, if the primary instance fails, one of the replicas will be automatically promoted to a stand-alone database instance.</li>
+<li>No</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid reasons to use read replication? (Choose two.)</p>
+<ol id="c02-list-0016" type="a">
+<li>You have customers in a region geographically distant from your 
+primary instance and want to improve their read performance when they 
+access your applications hosted in regions closer to them.</li>
+<li>Your current database instance is showing memory saturation with current traffic loads.</li>
+<li>Your boss has asked for an automated backup solution that takes advantage of AWS managed services.</li>
+<li>You need to perform additional OLTP queries and want to improve the performance of those queries.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_57"></span>Can you configure a database instance to be both a read replica and a primary database instance for the original instance?</p>
+<ol id="c02-list-0017" type="a">
+<li>Yes, as long as the instances are all in the same availability zone.</li>
+<li>Yes, if you turn on circular replication in both primary database instances.</li>
+<li>Yes, as long as the instances are not in the same availability zone.</li>
+<li>No, AWS does not support circular replication.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In which of the following ways can you create a read replica? (Choose two.)</p>
+<ol id="c02-list-0018" type="a">
+<li>Through the AWS console</li>
+<li>Through the AWS online support system</li>
+<li>Through the AWS API</li>
+<li>Through Elastic Beanstalk</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How are automated backups related to read replicas?</p>
+<ol id="c02-list-0019" type="a">
+<li>They are not; read replicas and automated backups have no relationship at all.</li>
+<li>Read replicas do not create automatic backups, but the primary 
+database instance must have automatic backups enabled to create read 
+replicas.</li>
+<li>Read replicas cause the primary database instance to automatically begin backing up.</li>
+<li>Each read replica is automatically backed up after an initial read from the primary database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Can a database instance be a read replica of one database and the source instance for another read replica?</p>
+<ol id="c02-list-0020" type="a">
+<li>Yes, as long as the source and replicant database are not the same instance.</li>
+<li>No, a database cannot be both a read replica and a source database.</li>
+<li>Yes, as long as the source and replicant database are in the same availability zone.</li>
+<li>Yes, as long as you enable circular replication on both databases.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How quickly can you make changes to the backup window used by your RDS instance?</p>
+<ol id="c02-list-0021" type="a">
+<li>Changes to the window via the console take place within 1 hour; changes made via the API take place immediately.</li>
+<li>Changes to the window take place after the next complete backup occurs.</li>
+<li>Changes to the window via the API take place within 1 hour; changes made via the console take place immediately.</li>
+<li>Changes to the window take place immediately.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the longest backup retention window that Amazon RDS allows?</p>
+<ol id="c02-list-0022" type="a">
+<li>30 days</li>
+<li>35 days</li>
+<li>45 days</li>
+<li>365 days</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_58"></span>You
+ have an Oracle installation using a custom geospatial plug-in. You also
+ want to ensure the maximum throughput for database operations once 
+those operations are begun by the plug-in. How would you set up Oracle 
+to meet these requirements?</p>
+<ol id="c02-list-0023" type="a">
+<li>Set up Oracle using RDS with provisioned IOPS.</li>
+<li>Set up Oracle using RDS with magnetic storage.</li>
+<li>Install Oracle on an EC2 instance with a provisioned IOPS EBS volume.</li>
+<li>Install Oracle on an EC2 instance with a magnetic EBS volume.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In what scenarios would you install an Oracle database on an EC2 instance rather than using RDS? (Choose two.)</p>
+<ol id="c02-list-0024" type="a">
+<li>You want to use an ALB to support multiple instances and round-robin request distributions.</li>
+<li>Your database size is greater than 80% of the maximum database size in RDS.</li>
+<li>You have custom plug-ins that will not run in RDS.</li>
+<li>You want to ensure that your database is only accessible through your private subnet in a VPC.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are SQL-based options in RDS? (Choose two.)</p>
+<ol id="c02-list-0025" type="a">
+<li>Aurora</li>
+<li>DynamoDB</li>
+<li>MariaDB</li>
+<li>Redshift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are a new architect at a company building out a large-scale 
+database deployment for web applications that receive thousands of 
+requests per minute. The previous architect suggested a Multi-AZ 
+deployment in RDS to ensure maximum responsiveness to the web tier. Is 
+this a good approach for high performance?</p>
+<ol id="c02-list-0026" type="a">
+<li>No, because a Multi-AZ deployment is no faster in responding to requests than a standard RDS deployment.</li>
+<li>Yes, because the additional databases in a Multi-AZ deployment will share the request load from the web tier.</li>
+<li>Yes, because a Multi-AZ deployment will ensure that if the primary 
+database goes down, a secondary database will be current and available.</li>
+<li>No, because a Multi-AZ deployment can only field requests from the availability zone in which each database resides.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You launch an EC2 instance that has two volumes attached: a root and 
+an additional volume, both created with default settings. What happens 
+to each volume when you terminate the instance?</p>
+<ol id="c02-list-0027" type="a">
+<li>The root volume is deleted and the additional volume is preserved.</li>
+<li>Both volumes are deleted.</li>
+<li>Both volumes are preserved.</li>
+<li>The instance is unable to terminate until the root volume is deleted.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_59"></span>How many S3 buckets can you add to an account?</p>
+<ol id="c02-list-0028" type="a">
+<li>100</li>
+<li>100 by default, but this can be increased by contacting AWS.</li>
+<li>It depends on the default set for the new account by AWS.</li>
+<li>It depends on how the account is configured at account creation.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What type of replication occurs in a Multi-AZ RDS setup?</p>
+<ol id="c02-list-0029" type="a">
+<li>Sequential replication</li>
+<li>Synchronous replication</li>
+<li>Asynchronous replication</li>
+<li>Synchronous replication for full backups and asynchronous replication for incremental backups</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What type of replication occurs in a read replica RDS setup?</p>
+<ol id="c02-list-0030" type="a">
+<li>Sequential replication</li>
+<li>Synchronous replication</li>
+<li>Asynchronous replication</li>
+<li>Synchronous replication for full backups and asynchronous replication for incremental backups</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following protocols and routing approaches does a classic load balancer support? (Choose two.)</p>
+<ol id="c02-list-0031" type="a">
+<li>IPv4</li>
+<li>IPv6</li>
+<li>HTTP/2</li>
+<li>Registering targets in target groups and routing traffic to those groups</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many elastic IP addresses can you create per region by default in a new AWS account?</p>
+<ol id="c02-list-0032" type="a">
+<li>5</li>
+<li>10</li>
+<li>20</li>
+<li>There is no preset limit.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>To how many EBS volumes can a single EC2 instance attach?</p>
+<ol id="c02-list-0033" type="a">
+<li>1</li>
+<li>2</li>
+<li>27</li>
+<li>Unlimited</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_60"></span>How many EC2 instances can be attached to a single EBS volume at one time?</p>
+<ol id="c02-list-0034" type="a">
+<li>1</li>
+<li>2</li>
+<li>27</li>
+<li>Unlimited</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following protocols are supported by an application load balancer? (Choose two.)</p>
+<ol id="c02-list-0035" type="a">
+<li>SSH</li>
+<li>HTTP</li>
+<li>HTTPS</li>
+<li>FTP</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provide ways to automate the backup of your RDS database? (Choose two.)</p>
+<ol id="c02-list-0036" type="a">
+<li>Automated snapshots</li>
+<li>S3 lifecycle management policies</li>
+<li>Automated backups</li>
+<li>Data pipeline</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have an EC2 instance running a heavy compute process that is 
+constantly writing data to and from a cache on disk. How and when should
+ you take a snapshot of the instance to ensure the most complete 
+snapshot?</p>
+<ol id="c02-list-0037" type="a">
+<li>Take a snapshot of the instance from the AWS console.</li>
+<li>Shut down the instance and take a snapshot of the instance.</li>
+<li>Take a snapshot of the instance from the AWS CLI.</li>
+<li>Detach the EBS volume attached to the instance and take a snapshot of both the EC2 and EBS instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Your web-based application uses a large RDS data store to write and 
+read user profile information. The latest marketing campaign has 
+increased traffic to the application by an order of magnitude. Users are
+ reporting long delays when logging in after having signed up. Which 
+solutions are valid approaches to addressing this lag? (Choose two.)</p>
+<ol id="c02-list-0038" type="a">
+<li>Set up a Multi-AZ configuration for your RDS and round-robin requests between the two RDS instances to spread out traffic.</li>
+<li>Employ ElastiCache to cache users’ credentials after their initial 
+visit to reduce trips to the database from the web application.</li>
+<li>Set up a read replica configuration for your RDS and round-robin requests between all the replicas to spread out traffic.</li>
+<li>Increase the number of EC2 instances allocated to your Auto Scaling group to spread out traffic on the web application tier.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_61"></span>Your
+ users are now storing all of their photos in your cloud-based 
+application. CloudWatch metrics suggests that photos are written an 
+average of 5 times per user per day and read 100 times per user per day.
+ If photos are lost, user surveys indicate that users are not typically 
+upset and simply re-upload the missing photo or ignore the missing photo
+ altogether. What is the most cost-effective recommendation for the S3 
+storage class to use?</p>
+<ol id="c02-list-0039" type="a">
+<li>Standard S3</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>S3 RRS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are consulting for a company that wants to migrate its 85TB data 
+store into S3. It is willing to upload the data into S3 every night in 
+small batches but is concerned that overseas customers using its other 
+applications might experience network latency as they are transferring 
+files into S3. What solution should you recommend to move the company’s 
+data?</p>
+<ol id="c02-list-0040" type="a">
+<li>Enable Transfer Acceleration on S3.</li>
+<li>Direct Connect</li>
+<li>Snowball</li>
+<li>Set up a VPN that uses a virtual private gateway for transferring the data.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid reasons for using Multipart Upload for uploading objects to S3? (Choose two.)</p>
+<ol id="c02-list-0041" type="a">
+<li>You need a solution that recovers from network issues.</li>
+<li>You need a solution to upload files larger than 10 GB.</li>
+<li>You need a solution for increasing the security around uploaded objects.</li>
+<li>You need a solution to decrease the time required to upload large files.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In which of the following situations would you recommend using a placement group?</p>
+<ol id="c02-list-0042" type="a">
+<li>Your fleet of EC2 instances requires high disk IO.</li>
+<li>Your fleet of EC2 instances requires high network throughput across two availability zones.</li>
+<li>Your fleet of EC2 instances requires high network throughput within a single availability zone.</li>
+<li>Your fleet of EC2 instances requires high network throughput to S3 buckets.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements are true about cluster placement groups? (Choose two.)</p>
+<ol id="c02-list-0043" type="a">
+<li>All instances in the group must be in the same availability zone.</li>
+<li>Instances in the group will see lowered network latency in communicating with each other.</li>
+<li>Instances in the group will see improved disk write performance when communicating with S3.</li>
+<li>Instances in the group must all be of the same instance class.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_62"></span>Which of the following statements are true about spread placement groups? (Choose two.)</p>
+<ol id="c02-list-0044" type="a">
+<li>All instances in the group must be in the same availability zone.</li>
+<li>Instances in the group will see lowered network latency in communicating with each other.</li>
+<li>You can have up to seven instances in multiple availability zones in the group.</li>
+<li>AWS provisions the hardware rather than having you specify the distinct hardware for the group.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following storage classes has the lowest durability?</p>
+<ol id="c02-list-0045" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>Glacier</li>
+<li>They all have equal durability.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following storage classes has the highest availability?</p>
+<ol id="c02-list-0046" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>Glacier</li>
+<li>They all have equal availability.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following storage classes support automated lifecycle transitions?</p>
+<ol id="c02-list-0047" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>Glacier</li>
+<li>They all support lifecycle transitions.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Where is data stored when placed into S3-IA? (Choose two.)</p>
+<ol id="c02-list-0048" type="a">
+<li>In the region specified at bucket creation</li>
+<li>In a special AWS “global” region for S3 storage</li>
+<li>In at least three availability zones</li>
+<li>In a single availability zone within at least three regions</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need to perform a large amount of OLAP. Which AWS service would you choose?</p>
+<ol id="c02-list-0049" type="a">
+<li>DynamoDB</li>
+<li>RDS Aurora</li>
+<li>Redshift</li>
+<li>Oracle installed on EC2 instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the maximum allowable RDS volume size when using provisioned IOPS storage?</p>
+<ol id="c02-list-0050" type="a">
+<li>8 TB</li>
+<li>16 TB</li>
+<li>12 TB</li>
+<li>1 PB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_63"></span>Which of the following EBS volumes is the most performant?</p>
+<ol id="c02-list-0051" type="a">
+<li>Provisioned IOPS</li>
+<li>Throughput optimized HDD</li>
+<li>Cold HDD</li>
+<li>General SSD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a valid reason to use a cold HDD EBS volume?</p>
+<ol id="c02-list-0052" type="a">
+<li>You need a performant solid-state drive.</li>
+<li>You are trying to choose the lowest-cost EBS volume possible.</li>
+<li>You are performing data warehousing using the volume.</li>
+<li>You need an inexpensive boot volume.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are available to use as an EBS boot volume? (Choose two.)</p>
+<ol id="c02-list-0053" type="a">
+<li>General SSD</li>
+<li>Cold HDD</li>
+<li>Throughput optimized HDD</li>
+<li>Provisioned IOPS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a valid reason to use a General Purpose SSD EBS volume? (Choose two.)</p>
+<ol id="c02-list-0054" type="a">
+<li>You need to support large database workloads.</li>
+<li>You want a blend of a performant SSD and a cost-sensitive SSD volume.</li>
+<li>You are performing data warehousing using the volume.</li>
+<li>You have low-latency apps and want to run them on a bootable volume.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a valid reason to use a magnetic EBS volume? (Choose two.)</p>
+<ol id="c02-list-0055" type="a">
+<li>You want a low-cost option for your EBS volume.</li>
+<li>You have a set of data that is infrequently accessed but want it stored on an EBS volume rather than S3.</li>
+<li>You need to perform processing to support Oracle installed on a fleet of EC2 instances.</li>
+<li>You have low-latency apps and want to run them on a bootable volume.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a valid reason to use a provisioned IOPS EBS volume? (Choose two.)</p>
+<ol id="c02-list-0056" type="a">
+<li>You want a low-cost option for your EBS volume.</li>
+<li>You need to support a large MongoDB database workload.</li>
+<li>You need massive performance and throughput for your applications.</li>
+<li>You have applications that need a bootable environment but can fail from time to time and be re-created.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_64"></span>Which of the following are characteristics of SSD-backed volumes? (Choose two.)</p>
+<ol id="c02-list-0057" type="a">
+<li>Transactional workloads</li>
+<li>Streaming workloads</li>
+<li>Small I/O size</li>
+<li>Throughput-focused</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are characteristics of HDD-backed volumes? (Choose two.)</p>
+<ol id="c02-list-0058" type="a">
+<li>Transactional workloads</li>
+<li>Streaming workloads</li>
+<li>Small I/O size</li>
+<li>Throughput-focused</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are charged with installing Oracle on a fleet of EC2 instances 
+due to custom Java-based plug-ins you need to install along with Oracle.
+ Which EBS volume type would you choose to best support your Oracle 
+installation?</p>
+<ol id="c02-list-0059" type="a">
+<li>Magnetic</li>
+<li>Throughput-optimized HDD</li>
+<li>Provisioned IOPS SSD</li>
+<li>General SSD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are the solutions architect for a company installing a web 
+application on a set of EC2 instances. The application writes a small 
+amount of user profile data to attached EBS volumes, and accesses that 
+data an average of once every five minutes if the user is still using 
+the web application. Additionally, because of the high cost of the 
+application’s RDS instance, you would like to minimize your EBS volume 
+costs. Which EBS volume type would you choose to support these 
+applications?</p>
+<ol id="c02-list-0060" type="a">
+<li>Magnetic</li>
+<li>Throughput-optimized HDD</li>
+<li>Provisioned IOPS SSD</li>
+<li>General SSD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can be an EBS boot volume? (Choose two.)</p>
+<ol id="c02-list-0061" type="a">
+<li>Magnetic</li>
+<li>Throughput-optimized HDD</li>
+<li>Provisioned IOPS SSD</li>
+<li>Cold HDD</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following cannot be used as an EBS boot volume? (Choose two.)</p>
+<ol id="c02-list-0062" type="a">
+<li>General SSD</li>
+<li>Throughput-optimized HDD</li>
+<li>Cold HDD</li>
+<li>Magnetic</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_65"></span>Which of the following is not an Elastic Load Balancing option?</p>
+<ol id="c02-list-0063" type="a">
+<li>Classic load balancer</li>
+<li>Application load balancer</li>
+<li>Weighting load balancer</li>
+<li>Network load balancer</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid Elastic Load Balancing options? (Choose two.)</p>
+<ol id="c02-list-0064" type="a">
+<li>ELB</li>
+<li>MLB</li>
+<li>ALB</li>
+<li>VLB</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>At what level of the TCP stack does an ALB operate?</p>
+<ol id="c02-list-0065" type="a">
+<li>Level 1</li>
+<li>Level 4</li>
+<li>Level 7</li>
+<li>Level 8</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>At what level of the TCP stack does a network load balancer operate?</p>
+<ol id="c02-list-0066" type="a">
+<li>Level 1</li>
+<li>Level 4</li>
+<li>Level 7</li>
+<li>Level 8</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>At what levels of the TCP stack does a classic load balancer operate? (Choose two.)</p>
+<ol id="c02-list-0067" type="a">
+<li>Level 1</li>
+<li>Level 4</li>
+<li>Level 7</li>
+<li>Level 8</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a valid reason to use an application load balancer?</p>
+<ol id="c02-list-0068" type="a">
+<li>You want your applications to automatically scale.</li>
+<li>You want to balance load across your applications, which reside in containers.</li>
+<li>You want to achieve better fault tolerance for your applications.</li>
+<li>All of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Can you use an elastic load balancer to balance load within a VPC?</p>
+<ol id="c02-list-0069" type="a">
+<li>Yes, as long as the VPC has an internet gateway.</li>
+<li>Yes, by setting the ELB to be internal to the VPC.</li>
+<li>No, load balancers can only route traffic from the Internet.</li>
+<li>No, load balancers cannot operate inside a VPC.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_66"></span>You
+ are an architect working on adding scalability to an application based 
+on EC2 instances within a public-facing VPC. You want the maximum amount
+ of flexibility in weighting and load balancing options, as you plan to 
+experiment with various routing types to see which handles load most 
+evenly. Which type of load balancer should you use?</p>
+<ol id="c02-list-0070" type="a">
+<li>Classic ELB</li>
+<li>Application load balancer</li>
+<li>Network load balancer</li>
+<li>Either an ALB or ELB would be suitable.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a host of EC2 instances all with dedicated IP addresses 
+serving results from complex computations. You want to load balance 
+across these instances, each of which receives hundreds of thousands of 
+requests a second currently. Which load balancer would you employ?</p>
+<ol id="c02-list-0071" type="a">
+<li>Classic ELB</li>
+<li>Application load balancer</li>
+<li>Network load balancer</li>
+<li>Either an ALB or ELB would be suitable.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a fleet of web-hosting EC2 instances. Currently, you have 
+SSL certificates installed for each EC2 instance, but the cost of 
+maintaining these certificates and installing new ones has become higher
+ over recent years. You want to architect a solution for SSL termination
+ that doesn’t involve multiple certificates. Which load balancer would 
+you suggest?</p>
+<ol id="c02-list-0072" type="a">
+<li>Classic ELB</li>
+<li>Application load balancer</li>
+<li>Network load balancer</li>
+<li>Either an ALB or ELB would be suitable.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You need a load balancer that supports SSL termination. Which type of load balancer would you choose?</p>
+<ol id="c02-list-0073" type="a">
+<li>Classic ELB</li>
+<li>Application load balancer</li>
+<li>Network load balancer</li>
+<li>Either an ALB or ELB would be suitable.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many domains can you register and manage with Route 53?</p>
+<ol id="c02-list-0074" type="a">
+<li>50</li>
+<li>100</li>
+<li>There is no limit.</li>
+<li>There is a limit of 50, but it can be raised upon request.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_67"></span>Which of the following record sets are supported by Route 53?</p>
+<ol id="c02-list-0075" type="a">
+<li>A records</li>
+<li>MX records</li>
+<li>Alias records</li>
+<li>All of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Are zone apex records supported by Route 53?</p>
+<ol id="c02-list-0076" type="a">
+<li>Yes</li>
+<li>No</li>
+<li>Yes, as long as they point to AWS resources.</li>
+<li>Not by default, but you can request support by AWS and then support them.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What engines does ElastiCache provide for caching? (Choose two.)</p>
+<ol id="c02-list-0077" type="a">
+<li>memcached</li>
+<li>redis</li>
+<li>cacherm</li>
+<li>gitcache</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following do you need to handle when setting up ElastiCache?</p>
+<ol id="c02-list-0078" type="a">
+<li>Patching</li>
+<li>Backups</li>
+<li>Monitoring</li>
+<li>None of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>For which of the following would ElastiCache offer performance improvements? (Choose two.)</p>
+<ol id="c02-list-0079" type="a">
+<li>Gaming</li>
+<li>ElastiCache can improve any application’s performance when used properly.</li>
+<li>Financial services</li>
+<li>A and C</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following accurately describe ElastiCache? (Choose two.)</p>
+<ol id="c02-list-0080" type="a">
+<li>An in-memory data store</li>
+<li>A runtime engine for data distribution</li>
+<li>A mechanism for sharding application demands</li>
+<li>A monitoring solution for large datasets</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following would you use to interact with a CloudFront distribution?</p>
+<ol id="c02-list-0081" type="a">
+<li>CloudFormation</li>
+<li>The AWS CLI</li>
+<li>The AWS REST APIs</li>
+<li>Any of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_68"></span>Which of the following are origin sources usable with a CloudFront distribution? (Choose two.)</p>
+<ol id="c02-list-0082" type="a">
+<li>An ALB</li>
+<li>DynamoDB</li>
+<li>AWS Shield</li>
+<li>An Oracle RDS instance</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are origin sources usable with a CloudFront distribution? (Choose two.)</p>
+<ol id="c02-list-0083" type="a">
+<li>DynamoDB</li>
+<li>A fleet of EC2 instances</li>
+<li>S3 buckets</li>
+<li>RedShift</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are origin sources usable with a CloudFront distribution? (Choose two.)</p>
+<ol id="c02-list-0084" type="a">
+<li>Lambda@Edge</li>
+<li>A static website on S3</li>
+<li>Aurora on RDS</li>
+<li>ElastiCache instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following two are advantages of using a CloudFront distribution? (Choose two.)</p>
+<ol id="c02-list-0085" type="a">
+<li>Performance</li>
+<li>Fault tolerance</li>
+<li>Integration with AWS managed services</li>
+<li>Disaster recovery</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How does CloudFront increase the security of content at the edge? (Choose two.)</p>
+<ol id="c02-list-0086" type="a">
+<li>Required HTTPS at all edge locations</li>
+<li>Integration with AWS WAF (if configured)</li>
+<li>Automatic client keys encrypted with KMS</li>
+<li>Automatic deployment of AWS Shield</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Choose the true statements about edge locations. (Choose two.)</p>
+<ol id="c02-list-0087" type="a">
+<li>There are fewer edge locations than regions.</li>
+<li>There are more edge locations than regions.</li>
+<li>There are fewer edge locations than availability zones.</li>
+<li>There are more edge locations than availability zones.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_69"></span>Which of the following can you do with CloudFront? (Choose two.)</p>
+<ol id="c02-list-0088" type="a">
+<li>Quickly deploy a global network for your content without contracts or startup requirements.</li>
+<li>Quickly create websites that are dynamic and low latency.</li>
+<li>Distribute content with low latency and high data transfer rates.</li>
+<li>Provide storage for static files that are frequently accessed.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can be origin servers for CloudFront? (Choose two.)</p>
+<ol id="c02-list-0089" type="a">
+<li>S3 buckets</li>
+<li>EC2 instances</li>
+<li>RedShift workloads</li>
+<li>SNS notifications</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which domain name should you use to take advantage of CloudFront?</p>
+<ol id="c02-list-0090" type="a">
+<li>The domain name registered to your S3 buckets in Route 53</li>
+<li>The domain name registered in CloudFront as the origin for your static and dynamic content</li>
+<li>The domain name registered in your ALB or ELB pointing to your content</li>
+<li>The domain name from the AWS console for your CloudFront distribution</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following might occur when content is requested from a CloudFront edge location? (Choose two.)</p>
+<ol id="c02-list-0091" type="a">
+<li>Cached content at the edge location is returned.</li>
+<li>The request is passed directly to an origin server without CloudFront processing.</li>
+<li>A request is made to an origin server for the requested content.</li>
+<li>A redirect is returned to the client.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements about CloudFront are not true? (Choose two.)</p>
+<ol id="c02-list-0092" type="a">
+<li>CloudFront edge locations are geographically distributed across the world.</li>
+<li>CloudFront maintains persistent connections with origin servers.</li>
+<li>A request will be routed by CloudFront to the nearest edge location to the origin server, which will serve that request.</li>
+<li>CloudFront can use an RDS instance of PostgreSQL as an origin server.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How is data transferred out from a region to a CloudFront edge location charged?</p>
+<ol id="c02-list-0093" type="a">
+<li>At normal egress data rates</li>
+<li>At half the price of normal egress rates</li>
+<li>At the lowest available rate for the region from which the data originates</li>
+<li>There is no charge.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_70"></span>Which of the following are true about both S3 and CloudFront? (Choose two.)</p>
+<ol id="c02-list-0094" type="a">
+<li>They both store files.</li>
+<li>They both support encryption of their content.</li>
+<li>They both cache files.</li>
+<li>They both provide low-latency distribution of content to clients.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following content types can be served by CloudFront? (Choose two.)</p>
+<ol id="c02-list-0095" type="a">
+<li>The returned rows from a SQL query</li>
+<li>The response from a PHP script</li>
+<li>A Lambda function</li>
+<li>HTML and CSS</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can be CloudFront origin servers? (Choose two.)</p>
+<ol id="c02-list-0096" type="a">
+<li>A web server hosted on another cloud provider</li>
+<li>An EC2 instance fleet spread across two regions</li>
+<li>A MySQL RDS instance</li>
+<li>An SNS topic</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is an edge location?</p>
+<ol id="c02-list-0097" type="a">
+<li>A specific node within a worldwide network of data centers that deliver CloudFront content</li>
+<li>A virtual cloud of caching stations</li>
+<li>A fleet of EC2 instances managed by AWS</li>
+<li>An EC2 instance in a remote region from your primary content</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is a CloudFront distribution?</p>
+<ol id="c02-list-0098" type="a">
+<li>A worldwide network of data centers</li>
+<li>A set of origin servers whose content is served by CloudFront via various edge locations</li>
+<li>The cached content on CloudFront edge locations at any given time</li>
+<li>The cached content from your account stored on CloudFront edge locations at any given time</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How long is content cached at an edge location?</p>
+<ol id="c02-list-0099" type="a">
+<li>24 hours</li>
+<li>12 hours</li>
+<li>12 hours by default, but this value can be changed.</li>
+<li>24 hours by default, but this value can be changed.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_71"></span>What is the shortest expiration period allowed for a CloudFront edge location?</p>
+<ol id="c02-list-00100" type="a">
+<li>0 seconds</li>
+<li>5 seconds</li>
+<li>30 seconds</li>
+<li>1 minute</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a CloudFront distribution setup, but you are not seeing any 
+performance benefit to your users. What might be possible causes for the
+ lack of benefit? (Choose two.)</p>
+<ol id="c02-list-00101" type="a">
+<li>Users do not have CloudFront enabled in their client applications 
+and are therefore not getting the benefits of the CloudFront 
+distribution. Enable CloudFront in their client applications.</li>
+<li>The expiration period is set so low that caching is not happening enough to benefit users. Raise the expiration period time.</li>
+<li>Your set of origin servers is too small and being flooded by 
+requests from CloudFront. Consider increasing the number or processing 
+power of origin servers.</li>
+<li>Users are not close enough to edge locations to see a benefit from CloudFront.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Why would you set the expiration period to 0 on a CloudFront distribution?</p>
+<ol id="c02-list-00102" type="a">
+<li>To expire all content on all existing edge locations</li>
+<li>To ensure caching does not occur for maximum throughput</li>
+<li>To reduce the chances of a DDoS attack on your edge locations</li>
+<li>To ensure the most up-to-date content is served at all edge locations</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How can you delete a file from an edge location? (Choose two.)</p>
+<ol id="c02-list-00103" type="a">
+<li>Use the AWS console to navigate to the edge location and delete the file.</li>
+<li>Set the expiration period to 0 on your distribution.</li>
+<li>Remove the file from your origin servers.</li>
+<li>Delete the file from your CloudFront distribution using the AWS CLI.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which is the correct order of the steps below to remove a file from 
+an edge location immediately with the least interruption to existing 
+service?</p>
+<ol id="c02-list-00104" type="a">
+<li>First set the expiration time on a CloudFront distribution to 0; then remove the file from the origin servers.</li>
+<li>First take the CloudFront distribution offline; then remove the file from the origin servers.</li>
+<li>First remove the file from the origin servers; then set the expiration time on the CloudFront distribution to 0.</li>
+<li>First, remove the file from the origin servers; then take the CloudFront distribution offline.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_72"></span>Which of the following immediately removes an object from all edge locations?</p>
+<ol id="c02-list-00105" type="a">
+<li>Removing the object from all origin servers</li>
+<li>Removing all CloudFront edge locations with the object cached</li>
+<li>Removing the object using the invalidation API</li>
+<li>Invalidating the CloudFront distribution</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provides the highest availability for critical files?</p>
+<ol id="c02-list-00106" type="a">
+<li>S3</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following storage classes has the lowest first byte latency?</p>
+<ol id="c02-list-00107" type="a">
+<li>S3</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>They are all identical.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following storage classes provides the fastest data retrieval speeds?</p>
+<ol id="c02-list-00108" type="a">
+<li>S3</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>They are all identical.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How long does a typical Glacier data retrieval take?</p>
+<ol id="c02-list-00109" type="a">
+<li>1 hour</li>
+<li>1–3 hours</li>
+<li>3–5 hours</li>
+<li>5–10 hours</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Why would you choose S3-IA over S3?</p>
+<ol id="c02-list-00110" type="a">
+<li>You want to save money and don’t need your data as quickly.</li>
+<li>You want to save money and don’t need your data as frequently.</li>
+<li>You want to save money and don’t need data in multiple availability zones.</li>
+<li>You want to save money and don’t need fault tolerance of your data.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements are not true? (Choose two.)</p>
+<ol id="c02-list-00111" type="a">
+<li>There are more edge locations than availability zones.</li>
+<li>An edge location is separate from an availability zone.</li>
+<li>An RDS instance can be an origin server.</li>
+<li>The default expiration period is 12 hours.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_73"></span>Which of the following is a valid origin server for a CloudFront distribution?</p>
+<ol id="c02-list-00112" type="a">
+<li>An S3 bucket</li>
+<li>An EC2 instance</li>
+<li>An ALB</li>
+<li>All of the above</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does AWS call a collection of edge locations?</p>
+<ol id="c02-list-00113" type="a">
+<li>CloudFront</li>
+<li>An edge zone</li>
+<li>Lambda@Edge</li>
+<li>A distribution</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What type of distribution should you use for media streaming?</p>
+<ol id="c02-list-00114" type="a">
+<li>Web distribution</li>
+<li>Media distribution</li>
+<li>RTMP distribution</li>
+<li>Edge distribution</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid media distributions for CloudFront? (Choose two.)</p>
+<ol id="c02-list-00115" type="a">
+<li>Web distribution</li>
+<li>Media distribution</li>
+<li>RTMP distribution</li>
+<li>Edge distribution</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid direct operations on an edge location? (Choose two.)</p>
+<ol id="c02-list-00116" type="a">
+<li>Read an object.</li>
+<li>Write an object.</li>
+<li>Delete an object.</li>
+<li>Update an object.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid use cases for using ElastiCache? (Choose two.)</p>
+<ol id="c02-list-00117" type="a">
+<li>Real-time transactions</li>
+<li>Offline transactions</li>
+<li>Record storage</li>
+<li>Business intelligence</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_74"></span>Which of the following can ElastiCache be used for? (Choose two.)</p>
+<ol id="c02-list-00118" type="a">
+<li>Web server</li>
+<li>Database cache</li>
+<li>Object storage</li>
+<li>Message broker</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can ElastiCache be used for? (Choose two.)</p>
+<ol id="c02-list-00119" type="a">
+<li>Ephemeral storage</li>
+<li>Long-term storage</li>
+<li>Message Queue</li>
+<li>Logging store</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is an ElastiCache shard?</p>
+<ol id="c02-list-00120" type="a">
+<li>A collection of multiple nodes that make up a cluster</li>
+<li>A collection of clusters in an ElastiCache distribution</li>
+<li>A collection of edge locations in an ElastiCache distribution</li>
+<li>A single node in a cluster</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provides low latency access to most frequently accessed data while storing all data in the cloud?</p>
+<ol id="c02-list-00121" type="a">
+<li>Storage gateway – snapshot</li>
+<li>Storage gateway – virtual tape library</li>
+<li>Storage gateway – stored volume</li>
+<li>Storage gateway – cached volume</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provides low latency access to all data while still storing the dataset in the cloud?</p>
+<ol id="c02-list-00122" type="a">
+<li>Storage gateway – snapshot</li>
+<li>Storage gateway – virtual tape library</li>
+<li>Storage gateway – stored volume</li>
+<li>Storage gateway – cached volume</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provides the fastest access to a customer dataset?</p>
+<ol id="c02-list-00123" type="a">
+<li>S3 with Transfer Acceleration</li>
+<li>Storage gateway – virtual tape library</li>
+<li>Storage gateway – stored volume</li>
+<li>S3 standard</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provides access to frequently accessed data at
+ top speeds while still maintaining disaster recovery options?</p>
+<ol id="c02-list-00124" type="a">
+<li>Storage gateway – stored volume</li>
+<li>Storage gateway – virtual tape library</li>
+<li>S3-IA</li>
+<li>S3 standard</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_75"></span>You
+ are creating a user data storage system by using an S3 bucket with 
+multiple folders, one folder per user. You want to then tag each folder 
+with the username of the staff member and build IAM permissions based on
+ these tags. Which of the following is a problem with this approach?</p>
+<ol id="c02-list-00125" type="a">
+<li>S3 buckets cannot be permissioned using IAM.</li>
+<li>Folders in an S3 bucket cannot have individual tags associated with them.</li>
+<li>Buckets in S3 cannot be tagged with multiple tags.</li>
+<li>IAM cannot operate based on individual S3 buckets.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are in charge of a data migration your company is preparing to 
+undertake. Your company wants to store files on AWS and see if the costs
+ are lower than on-premises storage, but your company is being very 
+cautious. In this first phase, it wants to ensure the lowest possible 
+latency of the majority of the files. Which storage gateway 
+configuration would you recommend?</p>
+<ol id="c02-list-00126" type="a">
+<li>Cached volumes</li>
+<li>Virtual tape library</li>
+<li>Snapshot</li>
+<li>Stored volumes</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Why would you choose to configure read replicas across all available 
+AZs as opposed to configuring them in the same region as your primary 
+database source?</p>
+<ol id="c02-list-00127" type="a">
+<li>You have a global customer base.</li>
+<li>You want to ensure disaster recovery.</li>
+<li>You want to maximize network throughput.</li>
+<li>You should never configure read replicas outside of the region of the primary database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Why would you choose to configure read replicas across all available 
+AZs in the same single region as your primary database instance as 
+opposed to configuring them across all AWS regions?</p>
+<ol id="c02-list-00128" type="a">
+<li>You have a global customer base.</li>
+<li>You want to ensure disaster recovery.</li>
+<li>You have a localized customer base close to the target region.</li>
+<li>You should never configure all read replicas within the same region of the primary database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>All your customers are in a single geographical region, and you have 
+created a database instance and multiple read replicas across the AZs in
+ that region. Is there any value in also creating replicas in additional
+ regions?</p>
+<ol id="c02-list-00129" type="a">
+<li>No, there is no value in that approach.</li>
+<li>Yes, as you gain some disaster recovery benefits from a replica in another region.</li>
+<li>Yes, as customers may be routed to different regions when they request data from your databases.</li>
+<li>Yes, as S3 buckets are in different regions as well.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_76"></span>Which of the following can be done to a read replica? (Choose two.)</p>
+<ol id="c02-list-00130" type="a">
+<li>Read from it.</li>
+<li>Write to it.</li>
+<li>Fail over to it.</li>
+<li>Back it up.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following will tend to cause performance improvements in
+ an RDS instance that is currently severely taxed? (Choose two.)</p>
+<ol id="c02-list-00131" type="a">
+<li>Create RDS read replicas of the instance.</li>
+<li>Switch from RDS to DynamoDB.</li>
+<li>Configure the instance to use Multi-AZ.</li>
+<li>Upgrade the RDS instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a number of large PDF files stored in an RDS instance. These
+ PDFs are accessed infrequently, but when they are accessed, they need 
+to respond quickly to requests. As the user base increases, the load is 
+beginning to overwhelm the database. What suggestions would you make to 
+improve performance? (Choose two.)</p>
+<ol id="c02-list-00132" type="a">
+<li>Move the PDFs to S3.</li>
+<li>Install ElastiCache in front of the database.</li>
+<li>Create read replicas of the primary database.</li>
+<li>Consider increasing the available memory for the database instance.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a number of large PDF files stored in an RDS instance used 
+by a company’s internal staff, of which 80% are on-site. These PDFs are 
+accessed infrequently, but when they are accessed, they need to respond 
+quickly to requests. As the company’s support staff has increased, the 
+load is beginning to overwhelm the database. What suggestions would you 
+make to improve performance? (Choose two.)</p>
+<ol id="c02-list-00133" type="a">
+<li>Set up a CloudFront distribution.</li>
+<li>Upgrade the instance running the RDS database.</li>
+<li>Consider installing a storage gateway with stored volumes at the customer’s on-premises site.</li>
+<li>Install ElastiCache in front of the database.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a number of large PDF files stored in an RDS instance used 
+by a company’s geographically distributed user base. These PDFs are 
+accessed infrequently, but when they are accessed, they need to respond 
+quickly to requests. As the company’s user base has increased, the load 
+is beginning to overwhelm the database. What is the best option for 
+improving database performance?</p>
+<ol id="c02-list-00134" type="a">
+<li>Set up a CloudFront distribution.</li>
+<li>Create read replicas across the regions in which the user base accesses the application.</li>
+<li>Consider installing a storage gateway with stored volumes at the customer’s on- premises site.</li>
+<li>Install ElastiCache in front of the database.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_77"></span>You
+ have a number of large images stored in an RDS instance used by a 
+company’s geographically distributed user base. Each of these images is 
+accessed several thousand times a day and needs to respond quickly to 
+requests. As the company’s user base has increased, the load is 
+beginning to overwhelm the database. What is the best option for 
+improving database performance?</p>
+<ol id="c02-list-00135" type="a">
+<li>Upgrade the instance running the RDS database.</li>
+<li>Create read replicas across the regions in which the user base accesses the application.</li>
+<li>Consider installing a storage gateway with stored volumes at the customer’s on- premises site.</li>
+<li>Install ElastiCache in front of the database.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid routing policies for Route 53? (Choose two.)</p>
+<ol id="c02-list-00136" type="a">
+<li>Simple routing</li>
+<li>Fault recovery routing</li>
+<li>Latency-based routing</li>
+<li>Cached routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid routing policies for Route 53? (Choose two.)</p>
+<ol id="c02-list-00137" type="a">
+<li>Geolocation routing</li>
+<li>Weighted routing</li>
+<li>Round-robin routing</li>
+<li>Distributed routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid routing policies for Route 53? (Choose two.)</p>
+<ol id="c02-list-00138" type="a">
+<li>FIFO routing</li>
+<li>Multivalue answer routing</li>
+<li>Geoproximity routing</li>
+<li>Distributed routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following routing policies sends traffic to a single resource, such as a web server?</p>
+<ol id="c02-list-00139" type="a">
+<li>Geolocation routing</li>
+<li>Weighted routing</li>
+<li>Simple routing</li>
+<li>Latency-based routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following routing policies sends traffic to a single 
+resource, unless that resource is unhealthy, and then routes to a backup
+ resource?</p>
+<ol id="c02-list-00140" type="a">
+<li>Health-based routing</li>
+<li>Failover routing</li>
+<li>Simple routing</li>
+<li>Latency-based routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_78"></span>Which of the following routing policies chooses a route for a user based on the user’s geographic location?</p>
+<ol id="c02-list-00141" type="a">
+<li>Health-based routing</li>
+<li>Failover routing</li>
+<li>Geolocation routing</li>
+<li>Region-based routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following routing policies chooses a route for a user 
+based on the latency of the available region to which traffic can be 
+directed?</p>
+<ol id="c02-list-00142" type="a">
+<li>Health-based routing</li>
+<li>Latency-based routing</li>
+<li>Geolocation routing</li>
+<li>Region-based routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following routing policies can direct traffic to multiple resources as long as those resources are healthy?</p>
+<ol id="c02-list-00143" type="a">
+<li>Health-based routing</li>
+<li>Latency-based routing</li>
+<li>Multivalue answer routing</li>
+<li>Region-based routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following routing policies uses assigned weights to shape traffic to different resources?</p>
+<ol id="c02-list-00144" type="a">
+<li>Health-based routing</li>
+<li>Latency-based routing</li>
+<li>Multivalue answer routing</li>
+<li>Weighted routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following routing policies is ideal for routing traffic to a single web server?</p>
+<ol id="c02-list-00145" type="a">
+<li>Simple routing</li>
+<li>Latency-based routing</li>
+<li>Multivalue answer routing</li>
+<li>Weighted routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following Route 53 routing policies are ideal for a geographically distributed user base? (Choose two.)</p>
+<ol id="c02-list-00146" type="a">
+<li>Geolocation routing</li>
+<li>Geographical routing</li>
+<li>Geoproximity routing</li>
+<li>Weighted routing</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_79"></span>Which of the following values is an invalid weight for a weighted routing policy?</p>
+<ol id="c02-list-00147" type="a">
+<li>1</li>
+<li>255</li>
+<li>125</li>
+<li>These weights are all valid.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How does a weight of 0 affect routing on Route 53 when using a weighted routing policy?</p>
+<ol id="c02-list-00148" type="a">
+<li>0 is an invalid weight.</li>
+<li>All traffic is directed to the resource with a weight of 0, as long as that resource is healthy.</li>
+<li>No traffic is directed to the resource with a weight of 0.</li>
+<li>Traffic is routed to the resource, but health checks are not performed.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have three resources in a weighted routing policy. Resource A has
+ a weight of 100, resource B has a weight of 100, and resource C has a 
+weight of 200. How will traffic be routed in this scenario?</p>
+<ol id="c02-list-00149" type="a">
+<li>25% of traffic to resource A, 25% of traffic to resource B, and 50% of traffic to resource C</li>
+<li>10% of traffic to resource A, 10% of traffic to resource B, and 20% of traffic to resource C</li>
+<li>33% of traffic to resource A, 33% of traffic to resource B, and 33% of traffic to resource C</li>
+<li>There is not enough information to know how routing will occur in this scenario.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements concerning Route 53 routing policies are true? (Choose two.)</p>
+<ol id="c02-list-00150" type="a">
+<li>You can have multiple primary resources in a simple routing policy.</li>
+<li>A weighted routing policy uses weights for routing, but not health checks.</li>
+<li>You can have multiple secondary resources in a simple routing policy.</li>
+<li>Health checks are ignored if a resource has a weight of over 100 in a routing policy.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are responsible for a media-serving website backed by a database 
+that has a global user base. The fleet of EC2 instances serving the 
+website is responding well to requests from the US, but requests from 
+the EU are taking nearly five times as long to receive a response. 
+Database CPU utilization stays between 70% and 90% throughout the day. 
+What suggestions would you make to attempt to improve performance of 
+this website? (Choose two.)</p>
+<ol id="c02-list-00151" type="a">
+<li>Install ElastiCache in front of the RDS instance to cache common queries and reduce database reads and therefore overall load.</li>
+<li>Set up CloudFront to enable caching of data at edge locations closer to the EU user base.</li>
+<li>Set up an Auto Scaling group with low CPU thresholds to scale up the EC2 instances.</li>
+<li>Create additional EC2 instances that will serve the website, and locate them in a South Asia region.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_80"></span>Which of the following are not valid instance types? (Choose two.)</p>
+<ol id="c02-list-00152" type="a">
+<li>T3</li>
+<li>E1</li>
+<li>M5</li>
+<li>Q2</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the primary purpose of IAM?</p>
+<ol id="c02-list-00153" type="a">
+<li>Deployment of applications</li>
+<li>Management of permissions in AWS</li>
+<li>User authentication for applications</li>
+<li>Configuration of applications</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following statements about IAM are accurate? (Choose two.)</p>
+<ol id="c02-list-00154" type="a">
+<li>IAM manages access from one AWS resource to another.</li>
+<li>IAM manages the authentication interface for the AWS console.</li>
+<li>IAM manages access from a user to the AWS console.</li>
+<li>IAM manages single sign-on for users to AWS applications.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does IAM stand for?</p>
+<ol id="c02-list-00155" type="a">
+<li>Improved Access Management</li>
+<li>Identity and Access Management</li>
+<li>Information and Access Management</li>
+<li>Identity and Authorization Management</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following does IAM manage? (Choose two.)</p>
+<ol id="c02-list-00156" type="a">
+<li>Management of users accessing the AWS platform</li>
+<li>Management of permissions for hosted application features</li>
+<li>Management of roles affecting resources within AWS</li>
+<li>Management of cost controls for user actions</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of these is not managed by IAM? (Choose two.)</p>
+<ol id="c02-list-00157" type="a">
+<li>Groups of users that share permissions in AWS</li>
+<li>Groups of users that can log in to a hosted web application</li>
+<li>Which resources receive notifications from SNS</li>
+<li>A role that allows EC2 instances to access S3 buckets</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a feature of IAM?</p>
+<ol id="c02-list-00158" type="a">
+<li>Multi-Factor Authentication for AWS console access</li>
+<li>Multi-Factor Authentication for object deletion in S3</li>
+<li>Centralized control of AWS resource access</li>
+<li>Integration with Active Directory accounts</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_81"></span>Which of the following is a security risk as you grow your AWS developer base?</p>
+<ol id="c02-list-00159" type="a">
+<li>Turning on MFA for AWS console access</li>
+<li>Using a single developer account across your team</li>
+<li>Creating an account for each developer</li>
+<li>Requiring passwords with 12 or more characters</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is required when you create additional IAM users beyond the root user?</p>
+<ol id="c02-list-00160" type="a">
+<li>Turning on MFA for all accounts</li>
+<li>Turning on MFA for the root account</li>
+<li>Creating a customized sign-in link for users in addition to the AWS root account sign-in link</li>
+<li>Creating IAM groups for each new user</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are components of IAM? (Choose two.)</p>
+<ol id="c02-list-00161" type="a">
+<li>Users</li>
+<li>Groups</li>
+<li>Organizations</li>
+<li>Organizational units</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are components of IAM? (Choose two.)</p>
+<ol id="c02-list-00162" type="a">
+<li>Roles</li>
+<li>User policies</li>
+<li>Connections</li>
+<li>Permissions</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are tasked with ensuring that a fleet of EC2 instances can 
+retrieve data from S3 buckets. Which of the following might you need to 
+create? (Choose two.)</p>
+<ol id="c02-list-00163" type="a">
+<li>Role</li>
+<li>User</li>
+<li>Policy</li>
+<li>Group</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which types of access can you give a user via IAM? (Choose two.)</p>
+<ol id="c02-list-00164" type="a">
+<li>Console</li>
+<li>Application</li>
+<li>Organizational</li>
+<li>Programmatic</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_82"></span>Which of the following are valid AWS and IAM policy types? (Choose two.)</p>
+<ol id="c02-list-00165" type="a">
+<li>Access control lists</li>
+<li>Application-based</li>
+<li>Resource-based</li>
+<li>Permission-based</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In what language do you write IAM policies?</p>
+<ol id="c02-list-00166" type="a">
+<li>YAML</li>
+<li>JSON</li>
+<li>PHP</li>
+<li>ACSCII</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>To which of the following can an IAM policy be attached? (Choose two.)</p>
+<ol id="c02-list-00167" type="a">
+<li>Users</li>
+<li>Database entries</li>
+<li>Groups</li>
+<li>Passwords</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does MFA stand for?</p>
+<ol id="c02-list-00168" type="a">
+<li>Multi-Fraction Authentication</li>
+<li>Multi-Factor Authentication</li>
+<li>Multi-Factor Authorization</li>
+<li>Multi-Fraction Authorization</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How does IAM provide scalability benefits to your application deployments? (Choose two.)</p>
+<ol id="c02-list-00169" type="a">
+<li>It allows assignment of permissions to users en masse via groups.</li>
+<li>It handles allowing users access to hosted applications en masse.</li>
+<li>It allows consistency in access from instances to managed AWS services across large numbers of instances.</li>
+<li>It ensures that users do not accidentally delete objects from S3 stores.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following provide centralized user management across your AWS resources? (Choose two.)</p>
+<ol id="c02-list-00170" type="a">
+<li>KMS</li>
+<li>S3 SSE-C</li>
+<li>IAM</li>
+<li>AWS Organizations</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_83"></span>What is power user access, as it relates to IAM roles?</p>
+<ol id="c02-list-00171" type="a">
+<li>The AWS name for the root user</li>
+<li>All IAM users are considered power users.</li>
+<li>A type of user that has full access to all AWS services and resources but not group or user management</li>
+<li>A user that can access application deployment profiles</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can the root user not do?</p>
+<ol id="c02-list-00172" type="a">
+<li>Create users.</li>
+<li>Remove user access to the console.</li>
+<li>Delete a role.</li>
+<li>The root user can do all of these.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can a power user not do?</p>
+<ol id="c02-list-00173" type="a">
+<li>Create users.</li>
+<li>Create a new SNS topic.</li>
+<li>Stop a running EC2 instance created by another user.</li>
+<li>The power user can do all of these.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a best practice for handling root user access keys?</p>
+<ol id="c02-list-00174" type="a">
+<li>Store them only in an instances-protected <span class="codeLabel">.aws/</span> directory.</li>
+<li>Delete them and instead use different user IAM credentials.</li>
+<li>Only use them for API access but avoid console access.</li>
+<li>Enable MFA Delete for when they are used in association with S3.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following require root user credentials? (Choose two.)</p>
+<ol id="c02-list-00175" type="a">
+<li>Close an AWS account.</li>
+<li>Delete IAM users.</li>
+<li>Create a CloudFront key pair.</li>
+<li>Create an IAM policy.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following do not require root user credentials? (Choose two.)</p>
+<ol id="c02-list-00176" type="a">
+<li>Resizing an existing RDS instance</li>
+<li>Deploying an application via a CloudFormation template</li>
+<li>Restoring revoked permissions for a user</li>
+<li>Changing support options for an AWS account</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How do you remove the AWS account root user’s access to your application EC2 instances?</p>
+<ol id="c02-list-00177" type="a">
+<li>Delete all the keys in the instance’s <span class="codeLabel">.aws/</span> directory.</li>
+<li>Switch the instance to only accept SSH logins.</li>
+<li>Remove any keys from the instance’s <span class="codeLabel">.ssh/</span> directory.</li>
+<li>You can’t remove access for an AWS account root user.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_84"></span>In a typical single-account AWS environment, which group of users should have root-level account access?</p>
+<ol id="c02-list-00178" type="a">
+<li>Developers and managers</li>
+<li>Account auditors and developers</li>
+<li>2 to 3 developers or engineers responsible for account management</li>
+<li>Nobody</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is not a predefined AWS IAM policy?</p>
+<ol id="c02-list-00179" type="a">
+<li>Administrator</li>
+<li>Power User</li>
+<li>Billing</li>
+<li>These are all predefined policies in IAM.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You want to set your DevOps team up quickly in IAM. You have created 
+users for each member of the team. What additional steps should you 
+take? (Choose two.)</p>
+<ol id="c02-list-00180" type="a">
+<li>Create sign-in URLs for the users.</li>
+<li>Check the DevOps option for each user in the console.</li>
+<li>Attach the Developer Power User policy to each user.</li>
+<li>Attach the View-Only User policy to each user.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following policies would be the best fit for a manager who wants access to the company’s main AWS account?</p>
+<ol id="c02-list-00181" type="a">
+<li>Administrator</li>
+<li>Power User</li>
+<li>Security Auditor</li>
+<li>View-Only User</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following policies would be the best fit for a team 
+member running Hadoop jobs and queries to determine application usage 
+patterns?</p>
+<ol id="c02-list-00182" type="a">
+<li>Administrator</li>
+<li>Power User</li>
+<li>Security Auditor</li>
+<li>Data Scientist</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following policies would be the best fit for a team 
+member responsible for setting up resources for the development team, 
+working with AWS directory service, and potentially setting up DNS 
+entries?</p>
+<ol id="c02-list-00183" type="a">
+<li>System Administrator</li>
+<li>Power User</li>
+<li>Security Auditor</li>
+<li>Data Scientist</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_85"></span>Which of the following are not possible to do with IAM policies and permissions? (Choose two.)</p>
+<ol id="c02-list-00184" type="a">
+<li>Remove access for a user from EC2 instances.</li>
+<li>Remove access for the root user from EC2 instances.</li>
+<li>Give the root user access to a hosted web application.</li>
+<li>Add an additional user with access to all EC2 instances.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What does logging out of the AWS console and then logging back in accomplish?</p>
+<ol id="c02-list-00185" type="a">
+<li>Applies any IAM policies attached to the user since their last login</li>
+<li>Applies any IAM policies attached to groups that the user was added to since their last login</li>
+<li>Applies any updates to IAM policies via JSON or the AWS REST API that have been made since the user’s last login</li>
+<li>Nothing, all changes to an account are immediate and do not require logging in or back out.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have created a new user for a new developer at your company. What
+ permissions will this user have before you take any additional actions?</p>
+<ol id="c02-list-00186" type="a">
+<li>They will not have any access to any AWS services.</li>
+<li>They will have read-only access to all AWS services.</li>
+<li>They will have administrator-level access to all AWS services.</li>
+<li>They will have the same permissions as the root user until restricted.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have created a new user for a new developer at your company. What
+ steps do you need to take to ensure they can work with EC2 instances? 
+(Choose two.)</p>
+<ol id="c02-list-00187" type="a">
+<li>Set the user up as part of the AWS-defined EC2 Users group.</li>
+<li>Set the user up as a Developer user in the AWS console.</li>
+<li>Provide the user with a URL for signing in.</li>
+<li>Add the user to a group such as Administrators or power users.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How can you ensure that the new users you have created only can 
+access AWS via the API rather than through the console? (Choose two.)</p>
+<ol id="c02-list-00188" type="a">
+<li>Do not create a sign-in URL for the users.</li>
+<li>Only provide the users with an access key ID and secret access key.</li>
+<li>Uncheck the Log In To Console box next to the user in the AWS console.</li>
+<li>Turn off MFA for the user.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>To what degree do usernames have to be unique across AWS?</p>
+<ol id="c02-list-00189" type="a">
+<li>Across the region in which the user exists</li>
+<li>Across all AWS accounts</li>
+<li>Across the AWS account in which the user exists</li>
+<li>Usernames don’t have to be unique, but email addresses do.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_86"></span>Which of the following does a user need in order to access AWS resources programmatically? (Choose two.)</p>
+<ol id="c02-list-00190" type="a">
+<li>Username</li>
+<li>Access key ID</li>
+<li>Password</li>
+<li>Secret access key pair</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following does a user need in order to access the AWS console? (Choose two.)</p>
+<ol id="c02-list-00191" type="a">
+<li>Username</li>
+<li>Access key ID</li>
+<li>Password</li>
+<li>Secret access key pair</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>In what language are policy documents written?</p>
+<ol id="c02-list-00192" type="a">
+<li>JavaScript</li>
+<li>JSON</li>
+<li>Node.js</li>
+<li>Ruby</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following would apply to giving federated users access to the AWS console via single sign-on?</p>
+<ol id="c02-list-00193" type="a">
+<li>SAML</li>
+<li>JSON</li>
+<li>SSO</li>
+<li>IAM</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have a large user base in an Active Directory and want to give 
+these users access to the AWS console without creating individual users 
+in AWS for each. What approach would you take?</p>
+<ol id="c02-list-00194" type="a">
+<li>Set the AWS console to use the Read Users From Another Authentication Source feature.</li>
+<li>Use the database migration tool to migrate the Active Directory database into RDS.</li>
+<li>Set up AWS to federate the users from the Active Directory into AWS.</li>
+<li>You cannot use a non-AWS Active Directory for access to AWS.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following is a collection of permissions?</p>
+<ol id="c02-list-00195" type="a">
+<li>Group</li>
+<li>Role</li>
+<li>Topic</li>
+<li>Policy</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_87"></span>You
+ want to add a small group of developers located in a different region 
+than your main development office. How would you handle scaling out 
+users and permissions to this new region?</p>
+<ol id="c02-list-00196" type="a">
+<li>Create the new users in the second region.</li>
+<li>Create the new users in the primary region and then replicate them to the new region.</li>
+<li>Create the new users in the primary region, set up IAM replication, 
+and then apply correct permissions to the replicated users in the new 
+region.</li>
+<li>Create the new users and they will apply to all regions.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What considerations do you need to take to ensure that your policy 
+documents will scale across your entire organization and set of AWS 
+resources?</p>
+<ol id="c02-list-00197" type="a">
+<li>Make sure each policy has a name unique within the region to which it applies.</li>
+<li>Make sure each policy document has the <i>region: *</i> attribute so it applies to all regions.</li>
+<li>Nothing, policy documents are automatically applicable across all AWS resources within an account.</li>
+<li>When you create the policy document, ensure that you select the Avoid Regional Conflicts option.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following does Auto Scaling address? (Choose two.)</p>
+<ol id="c02-list-00198" type="a">
+<li>Application monitoring</li>
+<li>Capacity management</li>
+<li>Cost limiting</li>
+<li>Permissions management</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are benefits of Auto Scaling? (Choose two.)</p>
+<ol id="c02-list-00199" type="a">
+<li>Pay for only what you need.</li>
+<li>Improve network performance.</li>
+<li>Set up scaling quickly.</li>
+<li>Reduce VPC management overhead.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can be scaled using the Auto Scaling interface? (Choose two.)</p>
+<ol id="c02-list-00200" type="a">
+<li>DynamoDB</li>
+<li>Route 53 domains</li>
+<li>Aurora read replicas</li>
+<li>ALBs</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can be scaled using the Auto Scaling interface? (Choose two.)</p>
+<ol id="c02-list-00201" type="a">
+<li>ECS containers</li>
+<li>SNS topics</li>
+<li>Redshift</li>
+<li>EC2 instances</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_88"></span>What does AWS call a collection of components that can grow or shrink to meet user demand?</p>
+<ol id="c02-list-00202" type="a">
+<li>Auto Scaling policy</li>
+<li>Launch configuration</li>
+<li>Auto Scaling group</li>
+<li>Capacity group</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can you not specify in an Auto Scaling group? (Choose two.)</p>
+<ol id="c02-list-00203" type="a">
+<li>Minimum size</li>
+<li>Instances to add</li>
+<li>Desired capacity</li>
+<li>Desired cost</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can you specify in an Auto Scaling group? (Choose two.)</p>
+<ol id="c02-list-00204" type="a">
+<li>Maximum size</li>
+<li>Scaling policy</li>
+<li>Minimum processing threshold</li>
+<li>Memory allocation</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are part of an Auto Scaling launch configuration? (Choose two.)</p>
+<ol id="c02-list-00205" type="a">
+<li>Application language</li>
+<li>AMI ID</li>
+<li>Security group</li>
+<li>API endpoint</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are not part of an Auto Scaling launch configuration? (Choose two.)</p>
+<ol id="c02-list-00206" type="a">
+<li>Instance type</li>
+<li>Maximum memory utilization</li>
+<li>Cluster size</li>
+<li>Security group</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid scaling options for an Auto Scaling group? (Choose two.)</p>
+<ol id="c02-list-00207" type="a">
+<li>Manual scaling</li>
+<li>Memory-based scaling</li>
+<li>Schedule-based scaling</li>
+<li>Security-based scaling</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid scaling options for an Auto Scaling group? (Choose two.)</p>
+<ol id="c02-list-00208" type="a">
+<li>Demand-based scaling</li>
+<li>Instance-based scaling</li>
+<li>Resource-based scaling</li>
+<li>Maintain current instance levels</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_89"></span>Which Auto Scaling policy would you use to ensure that a specific number of instances is running at all times?</p>
+<ol id="c02-list-00209" type="a">
+<li>Demand-based scaling</li>
+<li>Instance-based scaling</li>
+<li>Resource-based scaling</li>
+<li>Maintain current instance levels</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which Auto Scaling policy would you use to add and remove instances based on CPU utilization?</p>
+<ol id="c02-list-00210" type="a">
+<li>Demand-based scaling</li>
+<li>Schedule-based scaling</li>
+<li>Resource-based scaling</li>
+<li>Maintain current instance levels</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which Auto Scaling policy would you use to add and remove instances at a certain time of day when usage is regularly high?</p>
+<ol id="c02-list-00211" type="a">
+<li>Demand-based scaling</li>
+<li>Schedule-based scaling</li>
+<li>Resource-based scaling</li>
+<li>Maintain current instance levels</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which Auto Scaling policy would you use to control scaling yourself, within a specified maximum and minimum number of instances?</p>
+<ol id="c02-list-00212" type="a">
+<li>Demand-based scaling</li>
+<li>Schedule-based scaling</li>
+<li>Manual-based scaling</li>
+<li>Maintain current instance levels</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of these would you supply for a manual Auto Scaling policy?</p>
+<ol id="c02-list-00213" type="a">
+<li>Desired capacity</li>
+<li>Time to scale up</li>
+<li>Maximum CPU utilization</li>
+<li>Scaling condition</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following can be used to trigger scaling up or down for an Auto Scaling group? (Choose two.)</p>
+<ol id="c02-list-00214" type="a">
+<li>CloudWatch</li>
+<li>SNS</li>
+<li>The AWS console</li>
+<li>Route 53</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_90"></span>You
+ have an Auto Scaling group with an instance that you believe is passing
+ its health checks but is not responding properly to requests. What is 
+the best approach to troubleshoot this instance?</p>
+<ol id="c02-list-00215" type="a">
+<li>Restart the instance.</li>
+<li>Remove the instance from the Auto Scaling group and then trouble shoot it.</li>
+<li>Put the instance into the Standby state and troubleshoot it normally.</li>
+<li>Add a CloudWatch metric to the instance to trigger Auto Scaling.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following are valid instance states for instances in an Auto Scaling group? (Choose two.)</p>
+<ol id="c02-list-00216" type="a">
+<li>Deleted</li>
+<li>ReadyForService</li>
+<li>InService</li>
+<li>Standby</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>What is the correct order of tasks to create an Auto Scaling group?</p>
+<ol id="c02-list-00217" type="a">
+<li>Verify your group, create an Auto Scaling group, create a launch configuration.</li>
+<li>Create a launch configuration, create an Auto Scaling group, verify your group.</li>
+<li>Create an Auto Scaling group, create a launch configuration, verify your group.</li>
+<li>Create a launch configuration, verify your group, create an Auto Scaling group.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many AMIs can you use within a single Auto Scaling group launch configuration?</p>
+<ol id="c02-list-00218" type="a">
+<li>None, you do not specify an AMI for a launch configuration.</li>
+<li>One for all instances within the group</li>
+<li>One for each instance in the group</li>
+<li>One for each class of instance in the group</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>How many security groups can you use within a single Auto Scaling group launch configuration?</p>
+<ol id="c02-list-00219" type="a">
+<li>None, you do not specify a security group for a launch configuration.</li>
+<li>One security group for all instances within the group</li>
+<li>One security group for incoming requests and 1 security group for all outgoing requests</li>
+<li>As many as you like</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>From which of the following can you create an Auto Scaling group?</p>
+<ol id="c02-list-00220" type="a">
+<li>An EC2 instance</li>
+<li>A launch configuration</li>
+<li>A launch template</li>
+<li>Any of these</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_91"></span>You
+ have an EC2 instance running a web application. You’ve lately seen 
+large increases in traffic and the application is responding slowly 
+several times a day. What are the best steps to take to ensure 
+consistent performance? (Choose two.)</p>
+<ol id="c02-list-00221" type="a">
+<li>Create a launch configuration with an AMI ID and instance parameters.</li>
+<li>Create an Auto Scaling group from the current EC2 instance.</li>
+<li>Set up an Auto Scaling group with demand-based scaling.</li>
+<li>Set up an Auto Scaling group with manual scaling.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You have an application that is peaking daily. You have determined 
+that a large user base on the East Coast is accessing the application 
+every evening, causing the application’s performance to degrade during 
+those hours. What steps would you take to level out performance? (Choose
+ two.)</p>
+<ol id="c02-list-00222" type="a">
+<li>Create an Auto Scaling group with schedule-based scaling.</li>
+<li>Consider hosting your Auto Scaling group in a US East region.</li>
+<li>Implement CloudFront to cache responses to user requests.</li>
+<li>Set up an Auto Scaling group with manual scaling.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>You are in charge of the backup processes for converting an in-house 
+network storage system to S3 on AWS. You want to minimize the costs of 
+cloud storage but preserve the lowest possible latency for requests to 
+the cloud-hosted files. What storage class would you suggest?</p>
+<ol id="c02-list-00223" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following will take the longest to retrieve data from?</p>
+<ol id="c02-list-00224" type="a">
+<li>S3 standard</li>
+<li>S3-IA</li>
+<li>S3 One Zone-IA</li>
+<li>Glacier</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p>Which of the following will take the longest to retrieve data from?</p>
+<ol id="c02-list-00225" type="a">
+<li>S3 standard.</li>
+<li>S3-IA.</li>
+<li>S3 One Zone-IA.</li>
+<li>They are all equal.</li>
+</ol></div>
+</li>
+<li class="essay">
+<div class="question">
+<p><span epub:type="pagebreak" role="doc-pagebreak" id="Page_92"></span>You
+ are in charge of a CPU-intensive application that has been refactored 
+to perform the most compute-heavy portions of processing separate from 
+normal daily operations. These compute-heavy tasks must finish every 
+month but can be stopped and started without affecting the overall 
+progress of the job. You want to reduce costs associated with this 
+processing; which instance pricing model would you suggest?</p>
+<ol id="c02-list-00226" type="a">
+<li>Reserved instances</li>
+<li>On-demand instances</li>
+<li>Dedicated hardware instances</li>
+<li>Spot instances</li>
+</ol></div>
+</li></ol>
+</section>
+</section>
+</section>
+</section>
+<div class="annotator-outer annotator-viewer viewer annotator-hide">
+  <ul class="annotator-widget annotator-listing"></ul>
+</div><div class="annotator-modal-wrapper annotator-editor-modal annotator-editor annotator-hide">
+	<div class="annotator-outer editor">
+		<h2 class="title">Highlight</h2>
+		<form class="annotator-widget">
+			<ul class="annotator-listing">
+			<li class="annotator-item"><textarea id="annotator-field-1" placeholder="Add a note using markdown (optional)" class="js-editor" maxlength="750"></textarea></li></ul>
+			<div class="annotator-controls">
+				<a class="link-to-markdown" href="https://daringfireball.net/projects/markdown/basics" target="_blank">?</a>
+				<ul>
+					<li class="delete annotator-hide"><a href="#delete" class="annotator-delete-note button positive">Delete Note</a></li>
+					<li class="save"><a href="#save" class="annotator-save annotator-focus button positive">Save Note</a></li>
+					<li class="cancel"><a href="#cancel" class="annotator-cancel button">Cancel</a></li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div><div class="annotator-modal-wrapper annotator-delete-confirm-modal" style="display: none;">
+  <div class="annotator-outer">
+    <h2 class="title">Highlight</h2>
+      <a class="js-close-delete-confirm annotator-cancel close" href="#close">Close</a>
+      <div class="annotator-widget">
+         <div class="delete-confirm">
+            Are you sure you want to permanently delete this note?
+         </div>
+         <div class="annotator-controls">
+            <a href="#cancel" class="annotator-cancel button js-cancel-delete-confirm">No, I changed my mind</a>
+            <a href="#delete" class="annotator-delete button positive js-delete-confirm">Yes, delete it</a>
+         </div>
+       </div>
+   </div>
+</div><div class="annotator-adder" style="display: none;">
+	<ul class="adders">
+		
+		<li class="copy"><a href="#">Copy</a></li>
+		
+		<li class="add-highlight"><a href="#">Add Highlight</a></li>
+		<li class="add-note"><a href="#">
+			Add Note
+		</a></li>
+		
+	</ul>
+</div></div></div>
+
+
+
+  <div class="t-sbo-prev sbo-prev sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c01.xhtml" class="prev nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-prev-label">Prev</span>
+          <span class="visuallyhidden">Previous Chapter</span>
+          <div class="pagination-title t-prev-title">Chapter 1 Domain 1: Design Resilient Architectures</div>
+        </a>
+    
+  
+  </div>
+
+  <div class="t-sbo-next sbo-next sbo-nav-bottom">
+  
+    
+      
+        <a href="https://learning.oreilly.com/library/view/aws-certified-solutions/9781119558439/c03.xhtml" class="next nav-link">
+      
+          <span aria-hidden="true" class="pagination-label t-next-label">Next</span>
+          <span class="visuallyhidden">Next Chapter</span>
+          <div class="pagination-title t-next-title">Chapter 3 Domain 3: Specify Secure Applications and Architectures</div>
+        </a>
+    
+  
+  </div>
+
+</section>
+  </div>
+<section class="sbo-saved-archives"></section>
+
+<script>
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  context = {
+    product: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      type: 'book',
+      identifier: '9781119558439',
+      topic: 'Amazon Web Services (AWS)'
+    },
+    content: {
+      title: 'AWS Certified Solutions Architect Practice Tests',
+      formatType: 'book',
+      identifier: '9781119558439',
+      author: 'Brett McLaughlin',
+      publisher: decodeHtml('Sybex'),
+      releaseDate: '2019-03-19',
+      parentTopic: 'none',
+      free: 'no',
+      subdirectory: 'none'
+    }
+  }
+  dataLayer.push(context);
+</script>
+
+
+
+          
+          
+  
+
+
+
+
+    
+    
+
+
+
+        
+      </div>
+      
+        
+
+
+<footer class="pagefoot t-pagefoot">
+  <a href="#" class="icon-up" style="display: none;"><div class="visuallyhidden">Back to top</div></a>
+  <ul class="js-footer-nav">
+  
+    
+    <li><a href="https://learning.oreilly.com/u/preferences/">Settings</a></li>
+    
+    <li><a href="https://learning.oreilly.com/public/support/">Support</a></li>
+    
+    <li><a href="https://learning.oreilly.com/accounts/logout/">Sign Out</a></li>
+    
+  
+  
+  </ul>
+  <span class="copyright">© 2019 <a href="https://learning.oreilly.com/" target="_blank">O'Reilly Media, Inc</a>.</span>
+  
+    
+    <a href="https://www.oreilly.com/terms/">Terms of Service</a> 
+     / 
+    
+    <a href="https://learning.oreilly.com/privacy">Privacy Policy</a> 
+    
+    
+  
+</footer>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":2,"licenseKey":"510f1a6865","transactionName":"YgdaZ0NSW0cEB0RdWltNfkZfUEFdCgofXFBHDVYdR1pQQxZeRl1QQj1aWkU=","applicationID":"172641827,79672898,93931619","errorBeacon":"bam.nr-data.net","agent":"","applicationTime":1557}</script>
+
+      
+    
+    <script src="Chapter02_Domain_2_%20Define_Performant_Architectures_files/a_005" charset="utf-8"></script>
+    <script src="Chapter02_Domain_2_%20Define_Performant_Architectures_files/a_002" charset="utf-8"></script>
+  
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1732687426968531");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1732687426968531&amp;ev=PageView&amp;noscript=1"></noscript><script type="text/javascript" id="">(function(){window.medalliaUserIdentifier=document.documentElement.dataset.userUuid;window.medalliaUserName=document.documentElement.dataset.username})();</script>
+<script type="text/javascript" id="" src="Chapter02_Domain_2_%20Define_Performant_Architectures_files/embed.js"></script>
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("set","agent","tmgoogletagmanager","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","443792972845831");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=443792972845831&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="">window._pp=window._pp||[];if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/register/")_pp.targetUrl="/confirm/trial";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/subscribe/")_pp.targetUrl="/confirm/paid";else if("\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="/confirmation/nnv/"&&"https:\/\/learning.oreilly.com\/library\/view\/aws-certified-solutions\/9781119558439\/b01.xhtml"=="https://learning.oreilly.com/signup/")_pp.targetUrl="/confirm/paid";_pp.siteId="2508";
+_pp.siteUId="ea1e33a9-826b-46a8-b2ee-42219d1a3cea";_pp.orderValue="undefined";_pp.orderId="undefined";(function(){var ppjs=document.createElement("script");ppjs.type="text/javascript";ppjs.async=true;ppjs.src=("https:"==document.location.protocol?"https:":"http:")+"//cdn.pbbl.co/r/"+_pp.siteId+".js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ppjs,s)})();</script><div class="annotator-notice"></div><script type="text/javascript" async="" src="Chapter02_Domain_2_%20Define_Performant_Architectures_files/generic1575498018713.js" charset="UTF-8"></script><div class="font-flyout" style="top: 201.031px; left: 1280px;"><div class="font-controls-panel">
+	<div class="nightmodes">
+		<ul>
+			<li class="day"><a href="#" id="day-mode" title="Day Mode">
+				<i class="fa fa-sun-o"></i>
+				<span>Day Mode</span></a></li>
+			<li class="cloudy"><a href="#" id="cloudy-mode" title="Cloudy Mode">
+				<i class="fa fa-cloud"></i>
+				<span>Cloud Mode</span>
+			</a></li>
+			<li class="night"><a href="#" id="night-mode" title="Night Mode">
+				<i class="fa fa-moon-o"></i>
+				<span>Night Mode</span>
+			</a></li>
+		</ul>
+	</div>
+
+	<div class="font-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-font left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-font-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-font right"></i>
+		</div>
+	</div>
+
+	<div class="column-resizer resizer">
+		<div class="draggable-containment-wrapper">
+			<i class="fa fa-compress left"></i>
+			<span class="filler" style="width: 50%;"></span>
+			<div id="js-column-size-draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 80px;"></div>
+			<i class="fa fa-expand right"></i>
+		</div>
+	</div>
+
+	<a id="reset" class="button" href="#">Reset</a>
+</div>
+</div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.8199979764699815"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.08838313581766866" alt="" src="Chapter02_Domain_2_%20Define_Performant_Architectures_files/0.txt" width="0" height="0"></div><div style="display: none; visibility: hidden;"><script>(function(){if(null!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')&&void 0!==document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]')){var a=!1;window.addEventListener("blur",function(){a&&dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"facebook",eventVal:0,nonInteraction:0})});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseover",function(){window.focus();
+a=!0});document.querySelector('iframe[title\x3d"fb:share_button Facebook Social Plugin"]').addEventListener("mouseout",function(){a=!1})}try{window.twttr=function(b,a,d){var c,e=b.getElementsByTagName(a)[0];if(!b.getElementById(d))return b=b.createElement(a),b.id=d,b.src="//platform.twitter.com/widgets.js",e.parentNode.insertBefore(b,e),window.twttr||(c={_e:[],ready:function(a){c._e.push(a)}})}(document,"script","twitter-wjs"),twttr.ready(function(a){a.events.bind("tweet",trackTwitter)})}catch(b){}})();
+null!==document.querySelector(".IN-widget")&&void 0!==document.querySelector(".IN-widget")&&document.querySelector(".IN-widget").addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"linkedin",eventVal:0,nonInteraction:0})});
+function trackTwitter(a){a&&(a.target&&"IFRAME"==a.target.nodeName&&(opt_target=extractParamFromUri(a.target.src,"url")),dataLayer.push({event:"eventTracker",eventCat:"social",eventAct:"share",eventLbl:"twitter",eventVal:0,nonInteraction:0}))}function extractParamFromUri(a,b){if(a){var c=new RegExp("[\\?\x26#]"+b+"\x3d([^\x26#]*)");c=c.exec(a);if(null!=c)return unescape(c[1])}};</script></div><script type="text/javascript" id="">function forceInputUppercase(a){var b=a.target.selectionStart,c=a.target.selectionEnd;a.target.value=a.target.value.toUpperCase();a.target.setSelectionRange(b,c)}void 0!=document.getElementById("id_promotion")&&null!=document.getElementById("id_promotion")&&document.getElementById("id_promotion").addEventListener("keyup",forceInputUppercase,!1);
+void 0!=document.getElementsByName("promotionCode")[0]&&null!=document.getElementsByName("promotionCode")[0]&&document.getElementsByName("promotionCode")[0].addEventListener("keyup",forceInputUppercase,!1);</script><script type="text/javascript" id="">var nonwExpandable=document.querySelectorAll(".orm-ff-NavigationSubnav-headerListItem a, .orm-ff-NavigationView-headerListItem a");nonwExpandable.forEach(function(a,b){b+1!=nonwExpandable.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):b+1==nonwExpandable.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var nonwExpandableFo=document.querySelectorAll(".drop-content li:not(.flyout-parent) a");
+nonwExpandableFo.forEach(function(a,b){"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1!=nonwExpandableFo.length?a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.childNodes[1].textContent})}):"drop-content"==a.parentNode.parentNode.parentNode.className&&b+1==nonwExpandableFo.length&&a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"user login",eventAct:"logout",eventLbl:"global nav | unified"})})});
+var expandable=document.querySelectorAll(".orm-ff-NavigationSubnav-toggleControls a, .orm-ff-NavigationView-toggleControls a");expandable.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.parentNode.parentNode.parentNode.querySelectorAll(".orm-Button-btnContentWrap span")[0].childNodes[1].textContent+" | "+a.textContent})})});var flyoutLinks=document.querySelectorAll(".flyout a");
+flyoutLinks.forEach(function(a){a.addEventListener("click",function(){dataLayer.push({event:"eventTracker",eventCat:"global nav",eventAct:"navigation",eventLbl:a.closest("li.flyout-parent").getElementsByTagName("a")[0].textContent+" | "+a.textContent})})});</script><span><div id="KampyleAnimationContainer" style="z-index: 2147483000; border: 0px none; position: fixed; display: block; width: 0px; height: 0px;"></div></span><iframe scrolling="no" allowtransparency="true" src="Chapter02_Domain_2_%20Define_Performant_Architectures_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe></body></html>
