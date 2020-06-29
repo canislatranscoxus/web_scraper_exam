@@ -33,7 +33,7 @@
 Description:
 
 This is a small project is a webscraper. The idea is extract questions from one file, extract answers from another file,
-and create a new html with questions and answers in a better format, useful for studying. 
+and create a new html with questions and answers in a better format, useful for studying AWS practice exams. 
 
 
 
